@@ -1,6 +1,6 @@
-# Django News Scraper
+# Django Automation System
 
-This is a Django project with a dashboard of news scraped using Celery Tasks
+This is a Django project with a dashboard of automated websites using Celery Tasks and Redis broker
 
 ## Project setup
 
