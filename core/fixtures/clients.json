@@ -6,7 +6,7 @@
         "fname": "Alien",
         "lname": "Zaki",
         "city": "Magic",
-        "state": "Dubai",
+        "state": 1,
         "zip": "123456",
         "address_line1": "King street",
         "address_line2": null,
@@ -14,14 +14,37 @@
         "email": "alien@domain.com",
         "ssn": "123456789",
         "dob": "1990-10-20",
-        "start_freeze_date": "2022-05-08",
-        "end_freeze_date": null,
+        "freeze_date": "2022-05-08",
         "id_card": "uploads/ID/456.PNG",
         "passport": "uploads/Passport/5e04aaa3c22face0c2b5e354fc6f88d7.jpg",
         "driver_license": "uploads/Driver/1211.PNG",
         "residency": "uploads/Residencies/1356.jpg",
         "created_at": "2022-05-08T10:17:43.184Z",
         "updated_at": "2022-05-08T10:17:43.184Z"
+    }
+},
+{
+    "model": "core.client",
+    "pk": 2,
+    "fields": {
+        "fname": "John",
+        "lname": "musk",
+        "city": "Sharjah",
+        "state": 2,
+        "zip": "12345",
+        "address_line1": "FF524-781 FISHISFASTD",
+        "address_line2": null,
+        "phone": null,
+        "email": "john.musk@domain.com",
+        "ssn": "456987231",
+        "dob": "1990-01-09",
+        "freeze_date": "2022-05-09",
+        "id_card": "uploads/ID/003_Rendering_Data_to_Templates.mp4_snapshot_01.51_2021.10.29_20.52.28_-_Copy.jpg",
+        "passport": "uploads/Passport/1.png",
+        "driver_license": "uploads/Driver/2.png",
+        "residency": "uploads/Residencies/11.png",
+        "created_at": "2022-05-09T14:55:30.904Z",
+        "updated_at": "2022-05-09T14:55:30.904Z"
     }
 }
 ]

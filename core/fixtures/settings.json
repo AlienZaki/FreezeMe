@@ -1,6 +1,6 @@
 [
   {
-    "model": "core.Settings",
+    "model": "settings.Settings",
     "pk": 1,
     "fields": {
         "name": "2captcha_key",

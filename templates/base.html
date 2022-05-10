@@ -15,24 +15,26 @@
     <!--  FontAwesome icons  -->
     <script src="{% static './js/fontawesome-icons-6.0.js' %}"></script>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet"href="{% static './css/offcanvas.css' %}">
-     <!-- jQuery -->
+    <link rel="stylesheet" href="{% static './css/offcanvas.css' %}">
+    <!-- jQuery -->
     <script src="{% static './js/jquery-3.6.0.min.js' %}"></script>
 
+    <!-- Page Custom -->
+    {% block header %}
+    {% endblock header %}
+
 </head>
-
 <body class="bg-light">
-
-<nav class="navbar navbar-expand-lg fixed-top " aria-label="Main navigation">
+<nav class="navbar navbar-expand-lg fixed-top  " aria-label="Main navigation">
     <div class="container">
         <a class="navbar-brand" href="/">FREEZE ME</a>
 
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             {% if request.user.is_authenticated %}
                 <div class="dropdown d-flex">
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle text-muted" style="font-size: 28px;"></i>
+                        <i class="bi bi-person-circle " style="font-size: 28px;"></i>
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
                         <li><a class="dropdown-item" href="{% url 'settings' %}#changePassword"><i
@@ -86,8 +88,8 @@
 <!-- Bootstrap core JS -->
 <script src="{% static './js/bootstrap.bundle.min.js' %}"></script>
 
-
-{% block js %}
-{% endblock js %}
+<!-- Page Custom -->
+{% block body %}
+{% endblock body %}
 </body>
 </html>

@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Client, Website, Requirement, Submission, Settings
+from .models import Client, Website, Requirement, Submission
+from state.models import State
+from settings.models import Settings
 
 
-admin.site.site_header = 'Freeze Me Administration'
+admin.site.site_header = 'Freeze-Me Administration'
 
 
 class WebsiteAdmin(admin.ModelAdmin):
@@ -27,8 +29,7 @@ class ClientAdmin(admin.ModelAdmin):
         'email',
         'ssn',
         'dob',
-        'start_freeze_date',
-        'end_freeze_date',
+        'freeze_date',
     ]
 
 
@@ -46,8 +47,7 @@ class RequirementAdmin(admin.ModelAdmin):
         'email',
         'ssn',
         'dob',
-        'start_freeze_date',
-        'end_freeze_date',
+        'freeze_date',
         'id_card',
         'passport',
         'driver_license',
@@ -59,6 +59,13 @@ class SettingsAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'value',
+        ]
+
+@admin.register(State)
+class StateAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'abbreviation',
         ]
 
 

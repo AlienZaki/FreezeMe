@@ -2,14 +2,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from core.views import ClientsItemListView, SubmissionsRecordListView, SettingsListView, ClientsListView
+from core.views import ClientsItemListView, SubmissionsRecordListView, SettingsListView, NewClientListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ClientsItemListView.as_view(), name='clients-list'),
     path('submissions/history/', SubmissionsRecordListView.as_view(), name='submissions-history'),
     path('settings/', SettingsListView.as_view(), name='settings'),
-    path('client/new/', ClientsListView.as_view(), name='new-client'),
+    path('client/new/', NewClientListView.as_view(), name='new-client'),
 
 
     # Debug Toolbar

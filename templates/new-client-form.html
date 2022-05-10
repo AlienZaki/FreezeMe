@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="{% static './css/bootstrap-datepicker.min.css' %}">
+{% endblock header %}
 
 {% block content %}
 
-    <form class="row" method="POST">
+    <form class="row needs-validation" method="POST" novalidate>
         {% csrf_token %}
         <!-- Client Information -->
         <div class="col-9">
@@ -57,7 +63,12 @@
 
                             <div class="col-3 mb-3">
                                 <label for="state" class="form-label">State<code class="fw-bold">*</code></label>
-                                <input type="text" class="form-control" name="state" id="state" required>
+                                <select class="form-select" aria-label="Default select example" name="state" id="state" required>
+                                  <option selected>SELECT A STATE</option>
+                                  {% for state in states %}
+                                        <option value="{{ state.abbreviation }}">{{ state.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
 
                             <div class="col-3 mb-3">
@@ -66,14 +77,16 @@
                             </div>
 
                             <div class="col-3 mb-3">
-                                <label for="dob" class="form-label">Date of Birth Code<code
+                                <label for="dob" class="form-label">Date of Birth<code
                                         class="fw-bold">*</code></label>
 {#                                <input type="text" class="form-control" name="dob" id="dob" required>#}
-                                <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" class="form-control">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
+                                <div class="input-group dob date" data-provide="datepicker">
+                                    <input type="text" class="form-control" placeholder="MM/DD/YYYY">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-light d-block">
+                                            <i class="fa fa-calendar"></i>
+                                          </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -98,13 +111,15 @@
 
                         <div class="row">
                             <div class="col-3 mb-3">
-                                <label for="sfreeze" class="form-label">Start Freeze Date</label>
-                                <input type="email" class="form-control" name="sfreeze" id="sfreeze">
-                            </div>
-
-                            <div class="col-3 mb-3">
-                                <label for="efreeze" class="form-label">End Freeze Date</label>
-                                <input type="email" class="form-control" name="efreeze" id="efreeze">
+                                <label for="freezeDate" class="form-label">Start Freeze Date</label>
+                                <div class="input-group freeze date" id="datepicker">
+                                    <input type="text" class="form-control" name="freezeDate" id="freezeDate" placeholder="MM/DD/YYYY">
+                                    <span class="input-group-append">
+                                      <span class="input-group-text bg-light d-block">
+                                        <i class="fa fa-calendar"></i>
+                                      </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -112,24 +127,24 @@
                         <div class="row">
                             <div class="col-6 mb-3">
                                 <label for="formFile" class="form-label">Passport</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
 
                             <div class="col-6 mb-3">
                                 <label for="formFile" class="form-label">State issued ID card</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6 mb-3">
                                 <label for="formFile" class="form-label">Driver's license</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
 
                             <div class="col-6 mb-3">
                                 <label for="formFile" class="form-label">Proof of Residency</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" id="formFile" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
                         </div>
                         <hr class="my-4">
@@ -149,26 +164,17 @@
                     </div>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start border-start-0 border-end-0 border-top-0">
-                        <div class="ms-2 me-auto text-truncate">
-                            <div class="fw-bold">Website Name</div>
-                            Website URL
-                        </div>
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input website-check" name="website1" id="website1" checked>
-                        </div>
-                    </li>
-
-                    <li class="list-group-item d-flex justify-content-between align-items-start border-start-0 border-end-0 border-top-0">
-                        <div class="ms-2 me-auto text-truncate">
-                            <div class="fw-bold">Website Name</div>
-                            Website URL
-                        </div>
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input website-check" name="website1" id="website1" checked>
-                        </div>
-                    </li>
-
+                    {% for website in websites %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start border-start-0 border-end-0 border-top-0">
+                            <div class="ms-2 me-auto text-truncate">
+                                <div class="fw-bold">{{ website.name }}</div>
+                                <a class="text-muted" href="{{ website.url }}" target="_blank">View form</a>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input website-check" name="website1" id="website1" checked>
+                            </div>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -177,19 +183,44 @@
 
 {% endblock content %}
 
-{% block js %}
+{% block body %}
+    <!-- Bootstrap Datepicker JS -->
+    <script src="{% static './js/bootstrap-datepicker.min.js' %}"></script>
     <script>
-        // handle submission select all switch
+        var today = new Date().toJSON().slice(0, 10);
+        var today_formatted = today.slice(5, 7) + '/'
+                   + today.slice(8, 10) + '/'
+                   + today.slice(0, 4);
+        $('#freezeDate').val(today_formatted);
+        var date_12y_formatted = today.slice(5, 7) + '/'
+                   + today.slice(8, 10) + '/'
+                   + (parseInt(today.slice(0, 4))-12);
+        $('.dob.date').datepicker({
+            startDate: "01/01/1900",
+            endDate: date_12y_formatted,
+            autoclose: true
+        });
+        $('.freeze.date').datepicker({
+            date: new Date(),
+            autoclose: true
+        });
+    </script>
+    <!-- handle submission select all switch -->
+    <script>
         $('#select-all').change(function() {
             if ($(this).prop('checked')) { // Checked
                 console.log('Checked', event);
-                $('.website-check').attr('checked', '');
-                $('.website-check').attr('disabled', '');
+                $('.website-check').each(function() {
+                  $( this ).attr('checked', '');
+                  $( this ).attr('disabled', '');
+                });
             }else { // unchecked
                 console.log('Unchecked', event);
-                $('.website-check').removeAttr('checked');
-                $('.website-check').removeAttr('disabled');
+                    $('.website-check').each(function() {
+                      $( this ).removeAttr('checked');
+                      $( this ).removeAttr('disabled');
+                    });
             }
         });
     </script>
-{% endblock js %}
+{% endblock body %}

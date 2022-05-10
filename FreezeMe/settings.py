@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_beat',
     'core',
+    'state',
+    'settings',
     'debug_toolbar',
 ]
 

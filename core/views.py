@@ -1,7 +1,9 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views import generic
 from django.shortcuts import reverse
-from .models import Client, Website, Requirement, Settings, Submission
+from .models import Client, Website, Requirement, Submission
+from settings.models import Settings
+from state.models import State
 from .forms import submissionForm, settingsForm, clientForm
 #from .tasks import scrape_async
 
@@ -71,6 +73,24 @@ class SettingsListView(generic.FormView):
     form_class = settingsForm
 
 
-class ClientsListView(generic.FormView):
+class NewClientListView(generic.FormView):
     template_name = 'new-client-form.html'
     form_class = clientForm
+
+    def get_success_url(self):
+        return reverse("clients-list")
+
+    def form_valid(self, form):
+        #scrape_async.delay()
+        return super(NewClientListView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(NewClientListView, self).get_context_data(**kwargs)
+
+        states = State.objects.all()
+        websites = Website.objects.all()
+        context.update({
+            'websites': websites,
+            'states': states,
+        })
+        return context

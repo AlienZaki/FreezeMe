@@ -1,25 +1,46 @@
 from datetime import date
 from django.db import models
+from state.models import State
+
+
+def upload_id(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/ID/id_{instance.ssn}.{extension}'
+
+
+def upload_passport(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/Passport/passport_{instance.ssn}.{extension}'
+
+
+def upload_driver(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/Driver/driver_{instance.ssn}.{extension}'
+
+
+def upload_residencies(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/Residencies/residency_{instance.ssn}.{extension}'
 
 
 class Client(models.Model):
     fname = models.CharField(max_length=255)
     lname = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     zip = models.CharField(max_length=255)
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
-    email = models.CharField(max_length=255, unique=True)
-    ssn = models.CharField(max_length=9)
+    email = models.EmailField(unique=True)
+    ssn = models.CharField(max_length=9, unique=True)
     dob = models.DateField()
-    start_freeze_date = models.DateField(null=True, blank=True, default=date.today)
-    end_freeze_date = models.DateField(null=True, blank=True)
-    id_card = models.ImageField(upload_to='uploads/ID/', null=True, blank=True)
-    passport = models.ImageField(upload_to='uploads/Passport/', null=True, blank=True)
-    driver_license = models.ImageField(upload_to='uploads/Driver/', null=True, blank=True)
-    residency = models.ImageField(upload_to='uploads/Residencies/', null=True, blank=True)
+    freeze_date = models.DateField(null=True, blank=True, default=date.today)
+    #end_freeze_date = models.DateField(null=True, blank=True)
+    id_card = models.ImageField(upload_to=upload_id, null=True, blank=True) #'uploads/ID/'
+    passport = models.ImageField(upload_to=upload_passport, null=True, blank=True)
+    driver_license = models.ImageField(upload_to=upload_driver, null=True, blank=True)
+    residency = models.ImageField(upload_to=upload_residencies, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -89,8 +110,7 @@ class Requirement(models.Model):
     email = models.BooleanField(default=True)
     ssn = models.BooleanField(default=True)
     dob = models.BooleanField(default=False)
-    start_freeze_date = models.BooleanField(default=False)
-    end_freeze_date = models.BooleanField(default=False)
+    freeze_date = models.BooleanField(default=False)
     id_card = models.BooleanField(default=False)
     passport = models.BooleanField(default=False)
     driver_license = models.BooleanField(default=False)
@@ -100,16 +120,6 @@ class Requirement(models.Model):
         return self.website.name
 
 
-class Settings(models.Model):
-    name = models.CharField(max_length=255, primary_key=True)
-    value = models.CharField(max_length=255)
-
-    class Meta:
-        verbose_name = "Settings"
-        verbose_name_plural = "Settings"
-
-    def __str__(self):
-        return self.name
 
 
 
