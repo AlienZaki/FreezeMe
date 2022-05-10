@@ -39,6 +39,8 @@ wrapt = "==1.14.1"
 Deprecated = "==1.2.13"
 Django = "==3.2.13"
 Pillow = "==9.1.0"
+django-environ = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
