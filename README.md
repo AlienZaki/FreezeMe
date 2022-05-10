@@ -1,6 +1,6 @@
-# Django Automation System
+# FreezeMe -  Django Web Automation System
 
-This is a Django project with a dashboard of automated websites using Celery Tasks and Redis broker
+This is a Django project with a dashboard of web automation using Celery Tasks and Redis broker
 
 ## Project setup
 
