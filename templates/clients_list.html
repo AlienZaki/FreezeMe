@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card my-5 shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>Clients</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="col-12 ">
+                <form method="GET" class="float-end">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">SSN</span>
+                        <input class="form-control text-center" name="q" type="search" placeholder="XXX-XX-XXXX" aria-label="Search">
+                        <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-magnifying-glass mx-2"></i></button>
+                    </div>
+                 </form>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">SSN</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Zip</th>
+                    <th scope="col">Address</th>
+{#                        <th scope="col">DOB</th>#}
+                    <th scope="col">Start freeze</th>
+{#                        <th scope="col">End freeze</th>#}
+{#                        <th scope="col">Succeed Submissions</th>#}
+{#                        <th scope="col">Failed Submissions</th>#}
+{#                        <th scope="col">Pending Submissions</th>#}
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in object_list %}
+                    <tr>
+                        <td scope="row">{{ item.fname }} {{ item.lname }}</td>
+                        <td scope="row">{{ item.ssn }}</td>
+                        <td scope="row">{{ item.email }}</td>
+                        <td scope="row">{{ item.phone|default:'-' }}</td>
+                        <td scope="row">{{ item.city }}</td>
+                        <td scope="row">{{ item.state }}</td>
+                        <td scope="row">{{ item.zip }}</td>
+                        <td scope="row text-truncate">{{ item.address_line1 }}</td>
+{#                            <td scope="row">{{ item.dob }}</td>#}
+                        <td scope="row">{{ item.start_freeze_date }}</td>
+{#                            <td scope="row">{{ item.end_freeze_date|default:'-' }}</td>#}
+{#                            <td><a href="{{ item.id_card.url }}" target="_blank">View</a></td>#}
+{#                            <td><a href="{{ item.passport.url }}" target="_blank">View</a></td>#}
+{#                            <td><a href="{{ item.driver_license.url }}" target="_blank">View</a></td>#}
+{#                            <td><a href="{{ item.residency.url }}" target="_blank">View</a></td>#}
+{#                            <td>{{ item.succeed_submissions|length }}</td>#}
+{#                            <td>{{ item.failed_submissions|length }}</td>#}
+{#                            <td>{{ item.pending_submissions|length }}</td>#}
+                        <td>
+                            <a href='#' class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                    <td>
+                        <a href='#' class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer text-muted">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <span>Showing: {{ object_list.count }} of {{ total_count }} records</span>
+
+                {% if page_obj %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end mb-0">
+
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link">Previous</a>
+                                </li>
+                            {% endif %}
+
+
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+                            </li>
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link">Next</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

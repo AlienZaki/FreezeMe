@@ -1,0 +1,26 @@
+[
+{
+    "model": "core.requirement",
+    "pk": 1,
+    "fields": {
+        "website": 1,
+        "fname": true,
+        "lname": true,
+        "city": true,
+        "state": true,
+        "zip": true,
+        "address_line1": true,
+        "address_line2": false,
+        "phone": false,
+        "email": true,
+        "ssn": true,
+        "dob": false,
+        "start_freeze_date": true,
+        "end_freeze_date": false,
+        "id_card": true,
+        "passport": false,
+        "driver_license": false,
+        "residency": false
+    }
+}
+]

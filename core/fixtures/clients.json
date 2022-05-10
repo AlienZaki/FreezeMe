@@ -1,0 +1,27 @@
+[
+{
+    "model": "core.client",
+    "pk": 1,
+    "fields": {
+        "fname": "Alien",
+        "lname": "Zaki",
+        "city": "Magic",
+        "state": "Dubai",
+        "zip": "123456",
+        "address_line1": "King street",
+        "address_line2": null,
+        "phone": null,
+        "email": "alien@domain.com",
+        "ssn": "123456789",
+        "dob": "1990-10-20",
+        "start_freeze_date": "2022-05-08",
+        "end_freeze_date": null,
+        "id_card": "uploads/ID/456.PNG",
+        "passport": "uploads/Passport/5e04aaa3c22face0c2b5e354fc6f88d7.jpg",
+        "driver_license": "uploads/Driver/1211.PNG",
+        "residency": "uploads/Residencies/1356.jpg",
+        "created_at": "2022-05-08T10:17:43.184Z",
+        "updated_at": "2022-05-08T10:17:43.184Z"
+    }
+}
+]

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#7952b3">
+    <title>Freeze Me</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static './css/bootstrap.min.css' %}">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="{% static './css/bootstrap-icons.css' %}">
+    <!--  FontAwesome icons  -->
+    <script src="{% static './js/fontawesome-icons-6.0.js' %}"></script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet"href="{% static './css/offcanvas.css' %}">
+     <!-- jQuery -->
+    <script src="{% static './js/jquery-3.6.0.min.js' %}"></script>
+
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg fixed-top " aria-label="Main navigation">
+    <div class="container">
+        <a class="navbar-brand" href="/">FREEZE ME</a>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            {% if request.user.is_authenticated %}
+                <div class="dropdown d-flex">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle text-muted" style="font-size: 28px;"></i>
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="{% url 'settings' %}#changePassword"><i
+                                class="fa-solid fa-key text-muted me-2"></i>Change Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form>
+                                <a class="dropdown-item" href="#"><i class="fa-solid fa-power-off text-danger me-2"></i>Sign
+                                    out</a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+
+<div class="bg-body shadow-sm">
+    <nav class="container nav nav-underline" aria-label="Secondary navigation">
+
+        <a class="nav-link {% if request.resolver_match.url_name == '#' %} active text-primary{% endif %}"
+           aria-current="page" href="/"><i class="fa-solid fa-gauge mx-2"></i>Dashboard</a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'clients-list' %} active text-primary {% endif %}"
+           href="{% url 'clients-list' %}"><i class="fa-solid fa-user-group mx-2"></i>Clients
+            {#                <span class="badge bg-secondary  rounded-pill align-text-bottom">27</span>#}
+        </a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'submissions-history' %} active text-primary{% endif %}"
+           href="{% url 'submissions-history' %}"><i class="fa-solid fa-list-check mx-2"></i>Submissions</a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'settings' %} active text-primary{% endif %}"
+           href="{% url 'settings' %}"><i class="fa-solid fa-gear mx-2"></i>Settings</a>
+
+        <div class="nav-item align-self-center">
+            <a class="btn btn-success btn-sm" href="{% url 'new-client' %}"><i class="fa-solid fa-user-plus me-2"></i>Add
+                Client</a>
+        </div>
+    </nav>
+
+</div>
+
+<main role="main" class="container">
+
+    {% block content %}
+    {% endblock content %}
+
+</main>
+
+<!-- Bootstrap core JS -->
+<script src="{% static './js/bootstrap.bundle.min.js' %}"></script>
+
+
+{% block js %}
+{% endblock js %}
+</body>
+</html>

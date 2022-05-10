@@ -1,0 +1,10 @@
+[
+  {
+    "model": "core.Settings",
+    "pk": 1,
+    "fields": {
+        "name": "2captcha_key",
+        "value": "7e9ca143e7aa1d52071545be45efb5d5"
+      }
+  }
+]

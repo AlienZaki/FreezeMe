@@ -1,0 +1,11 @@
+[
+  {
+    "model": "core.Website",
+    "pk": 1,
+    "fields": {
+        "name": "ARS Consumer Office",
+        "url": "https://www.ars-consumeroffice.com/add"
+      }
+
+  }
+]
