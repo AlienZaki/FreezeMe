@@ -117,7 +117,7 @@ MEDIA_URL = '/media/'
 # ]
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -181,3 +181,5 @@ if DEBUG is False:
             'PORT': env('DB_PORT')
         }
     }
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
