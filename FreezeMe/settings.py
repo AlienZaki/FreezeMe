@@ -108,19 +108,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -133,6 +121,21 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 #CELERY_TASK_TRACK_STARTED = True
 #CELERY_TASK_TIME_LIMIT = 30 * 60
 
+
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 
 if DEBUG is False:
@@ -182,4 +185,7 @@ if DEBUG is False:
         }
     }
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+
