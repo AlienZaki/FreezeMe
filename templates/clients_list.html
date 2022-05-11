@@ -52,7 +52,7 @@
                         <td scope="row">{{ item.zip }}</td>
                         <td scope="row text-truncate">{{ item.address_line1 }}</td>
 {#                            <td scope="row">{{ item.dob }}</td>#}
-                        <td scope="row">{{ item.freeze_date }}</td>
+                        <td scope="row">{{ item.freeze_date|date:"m/d/Y" }}</td>
 {#                            <td scope="row">{{ item.end_freeze_date|default:'-' }}</td>#}
 {#                            <td><a href="{{ item.id_card.url }}" target="_blank">View</a></td>#}
 {#                            <td><a href="{{ item.passport.url }}" target="_blank">View</a></td>#}
