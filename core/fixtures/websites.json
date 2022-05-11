@@ -5,6 +5,7 @@
     "fields": {
         "name": "ARS Consumer Office",
         "url": "https://www.ars-consumeroffice.com/add",
+        "ready": true,
         "created_at": null,
         "updated_at": null
     }
@@ -15,6 +16,7 @@
     "fields": {
         "name": "LexisNexis  Risk Solutions",
         "url": "https://forms.consumer.risk.lexisnexis.com/#/freeze-self",
+        "ready": true,
         "created_at": "2022-05-09T17:17:10.776Z",
         "updated_at": "2022-05-09T17:17:10.776Z"
     }

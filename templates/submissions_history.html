@@ -46,7 +46,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for item in object_list %}
+                {% for item in submissions %}
                     <tr>
                         <td scope="row">{{ item.client.full_name }}</td>
                         <td>{{ item.website.name }}</td>
@@ -73,15 +73,15 @@
         <div class="card-footer text-muted">
             <div class="d-flex justify-content-between align-items-center">
 
-                <span>Showing: {{ object_list|length }} of {{ total_count }} records</span>
+                <span>Showing: {{ submissions|length }} of {{ submissions.paginator.count }} records</span>
 
-                {% if object_list %}
+                {% if submissions %}
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end mb-0">
 
-                            {% if object_list.has_previous %}
+                            {% if submissions.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ object_list.previous_page_number }}">Previous</a>
+                                    <a class="page-link" href="?page={{ submissions.previous_page_number }}">Previous</a>
                                 </li>
                             {% else %}
                                 <li class="page-item disabled">
@@ -91,11 +91,11 @@
 
 
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ object_list.number }}">{{ object_list.number }}</a>
+                                <a class="page-link" href="?page={{ submissions.number }}">{{ submissions.number }}</a>
                             </li>
-                            {% if object_list.has_next %}
+                            {% if submissions.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ object_list.next_page_number }}">Next</a>
+                                    <a class="page-link" href="?page={{ submissions.next_page_number }}">Next</a>
                                 </li>
                             {% else %}
                                 <li class="page-item disabled">

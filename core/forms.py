@@ -1,4 +1,5 @@
 from django import forms
+from .models import Client, Settings
 
 
 
@@ -11,9 +12,14 @@ class submissionForm(forms.Form):
     #finished = forms.ChoiceField(choices=FINISHED_CHOICES, label="Some Label", initial='', widget=forms.Select(), required=True)
 
 
-class settingsForm(forms.Form):
-    hidden = forms.HiddenInput()
+
+class settingsForm(forms.ModelForm):
+    class Meta:
+        model = Settings
+        fields = '__all__'
 
 
-class clientForm(forms.Form):
-    hidden = forms.HiddenInput()
+class clientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = '__all__'

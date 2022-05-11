@@ -4,6 +4,8 @@
     "pk": 1,
     "fields": {
         "fname": "Alien",
+        "mname": null,
+        "suffix": null,
         "lname": "Zaki",
         "city": "Magic",
         "state": 1,
@@ -28,6 +30,8 @@
     "pk": 2,
     "fields": {
         "fname": "John",
+        "mname": null,
+        "suffix": null,
         "lname": "musk",
         "city": "Sharjah",
         "state": 2,

@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import environ
+from django.contrib.messages import constants as messages
 
 
 env = environ.Env()
@@ -33,7 +34,6 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'core',
     'state',
-    'settings',
     'debug_toolbar',
 ]
 
@@ -99,6 +99,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 
 # Internationalization

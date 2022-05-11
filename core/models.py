@@ -1,6 +1,7 @@
 from datetime import date
 from django.db import models
 from state.models import State
+from django.shortcuts import reverse
 
 
 def upload_id(instance, filename):
@@ -25,6 +26,8 @@ def upload_residencies(instance, filename):
 
 class Client(models.Model):
     fname = models.CharField(max_length=255)
+    mname = models.CharField(max_length=255, null=True, blank=True)
+    suffix = models.CharField(max_length=255, null=True, blank=True)
     lname = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
@@ -60,6 +63,9 @@ class Client(models.Model):
     def pending_submissions(self):
         return self.submission_set.filter(finished=False)
 
+    def get_absolute_url(self):
+        return reverse('client_list')
+
 
     def __str__(self):
         return f'{self.fname} {self.lname}'
@@ -68,6 +74,8 @@ class Client(models.Model):
 class Website(models.Model):
     name = models.CharField(max_length=255)
     url = models.URLField()
+    ready = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
@@ -120,7 +128,15 @@ class Requirement(models.Model):
         return self.website.name
 
 
+class Settings(models.Model):
+    captcha_key = models.CharField(max_length=255, null=True, blank=True)
 
+    class Meta:
+        verbose_name = "Settings"
+        verbose_name_plural = "Settings"
+
+    def __str__(self):
+        return self.captcha_key
 
 
 
