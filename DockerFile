@@ -31,5 +31,5 @@ EXPOSE 80
 COPY ./runserver.sh /usr/local/bin/
 
 # run - migrate, load data, and run
-CMD ["runserver.sh"]
+CMD ["sh","runserver.sh"]
 
