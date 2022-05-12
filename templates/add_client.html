@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="row ">
-        <form class="d-flex justify-content-center" method="POST" enctype="multipart/form-data">
+        <form class="d-flex justify-content-center" method="POST" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         <!-- Client Information -->
         <div class="col-9">
@@ -90,13 +90,13 @@
                                         class="fw-bold">*</code></label>
 {#                                <input type="text" class="form-control" name="dob" id="dob" required>#}
                                 <div class="input-group dob date" data-provide="datepicker">
-                                    <input type="text" class="form-control {% if form.errors.dob %}is-invalid{% endif %}" name="dob" id="dob" placeholder="MM/DD/YYYY" value="{{ form.dob.value|date:"m/d/Y"|default:'' }}" required>
-                                    <div class="invalid-feedback">{{ form.errors.dob.0 }}</div>
+                                    <input type="text" class="form-control {% if form.errors.dob %}is-invalid{% endif %}" name="dob" id="dob" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" inputmode="numeric" placeholder="MM/DD/YYYY" value="{{ form.dob.value|date:"m/d/Y"|default:'' }}" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-light d-block">
                                             <i class="fa fa-calendar"></i>
                                           </span>
                                     </span>
+                                    <div class="invalid-feedback">{{ form.errors.dob.0 }}</div>
                                 </div>
                             </div>
                         </div>
@@ -104,19 +104,22 @@
                         <div class="row">
                             <div class="col-3 mb-3">
                                 <label for="ssn" class="form-label">Social Security Number<code class="fw-bold">*</code></label>
-                                <input type="text" class="form-control {% if form.errors.ssn %}is-invalid{% endif %}" name="ssn" id="ssn" placeholder="XXX-XX-XXXX" value="{{ form.ssn.value|default:'' }}" required>
+                                <input type="text" class="form-control {% if form.errors.ssn %}is-invalid{% endif %}" name="ssn" id="ssn" data-inputmask="'mask': '999-99-9999'" inputmode="numeric" placeholder="XXX-XX-XXXX" value="{{ form.ssn.value|default:'' }}" required>
                                 <div class="invalid-feedback">{{ form.errors.ssn.0 }}</div>
                             </div>
 
                             <div class="col-3 mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control {% if form.errors.phone %}is-invalid{% endif %}" name="phone" id="phone" value="{{ form.phone.value|default:'' }}">
-                                <div class="invalid-feedback">{{ form.errors.phone.0 }}</div>
+                                <div class="input-group">
+                                    <span class="input-group-text">+1</span>
+                                    <input type="text" class="form-control {% if form.errors.phone %}is-invalid{% endif %}" data-inputmask="'mask': '(999) 999-9999'" inputmode="numeric" name="phone" id="phone" value="{{ form.phone.value|default:'' }}">
+                                    <div class="invalid-feedback">{{ form.errors.phone.0 }}</div>
+                                </div>
                             </div>
 
                             <div class="col-6 mb-3">
                                 <label for="email" class="form-label">Email<code class="fw-bold">*</code></label>
-                                <input type="email" class="form-control {% if form.errors.email %}is-invalid{% endif %}" name="email" id="email" value="{{ form.email.value|default:'' }}" required>
+                                <input type="email" class="form-control {% if form.errors.email %}is-invalid{% endif %}"  name="email" id="email" data-inputmask="'alias': 'email'" inputmode="numeric" value="{{ form.email.value|default:'' }}" required>
                                 <div class="invalid-feedback">{{ form.errors.email.0 }}</div>
                             </div>
                         </div>
@@ -125,13 +128,13 @@
                             <div class="col-3 mb-3">
                                 <label for="freeze_date" class="form-label">Start Freeze Date</label>
                                 <div class="input-group freeze date" id="datepicker">
-                                    <input type="text" class="form-control {% if form.errors.freeze_date %}is-invalid{% endif %}" name="freeze_date" id="freeze_date" placeholder="MM/DD/YYYY" value="{{ form.freeze_date.value|date:"m/d/Y"|default:'' }}">
-                                    <div class="invalid-feedback">{{ form.errors.freeze_date.0 }}</div>
+                                    <input type="text" class="form-control {% if form.errors.freeze_date %}is-invalid{% endif %}" name="freeze_date" id="freeze_date"  data-inputmask-alias="datetime" data-inputmask-inputformat="mm/dd/yyyy" inputmode="numeric" placeholder="MM/DD/YYYY" value="{{ form.freeze_date.value|date:"m/d/Y"|default:'' }}">
                                     <span class="input-group-append">
                                       <span class="input-group-text bg-light d-block">
                                         <i class="fa fa-calendar"></i>
                                       </span>
                                     </span>
+                                    <div class="invalid-feedback">{{ form.errors.freeze_date.0 }}</div>
                                 </div>
                             </div>
                         </div>
@@ -213,6 +216,10 @@
 {% block body %}
     <!-- Bootstrap Datepicker JS -->
     <script src="{% static './js/bootstrap-datepicker.min.js' %}"></script>
+    <!-- InputMask JS -->
+    <script src="{% static './js/jquery.inputmask.js' %}"></script>
+    <script src="{% static './js/inputmask.binding.js' %}"></script>
+    <!-- Page custom JS -->
     <script>
         var today = new Date().toJSON().slice(0, 10);
         var today_formatted = today.slice(5, 7) + '/'
@@ -233,21 +240,22 @@
         });
     </script>
     <!-- handle submission select all switch -->
-    <script>
-        $('#select-all').change(function() {
-            if ($(this).prop('checked')) { // Checked
-                console.log('Checked', event);
-                $('.website-check').each(function() {
-                  $( this ).attr('checked', '');
-                  $( this ).attr('disabled', '');
-                });
-            }else { // unchecked
-                console.log('Unchecked', event);
-                    $('.website-check').each(function() {
-                      $( this ).removeAttr('checked');
-                      $( this ).removeAttr('disabled');
-                    });
-            }
-        });
-    </script>
+{#    <script>#}
+{#        $('#select-all').change(function() {#}
+{#            if ($(this).prop('checked')) { // Checked#}
+{#                console.log('Checked', event);#}
+{#                $('.website-check').each(function() {#}
+{#                  $( this ).attr('checked', '');#}
+{#                  $( this ).attr('disabled', '');#}
+{#                });#}
+{#            }else { // unchecked#}
+{#                console.log('Unchecked', event);#}
+{#                    $('.website-check').each(function() {#}
+{#                      $( this ).removeAttr('checked');#}
+{#                      $( this ).removeAttr('disabled');#}
+{#                    });#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+
 {% endblock body %}

@@ -34,7 +34,7 @@ class Client(models.Model):
     zip = models.CharField(max_length=255)
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, null=True, blank=True)
-    phone = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=10, null=True, blank=True)
     email = models.EmailField(unique=True)
     ssn = models.CharField(max_length=9, unique=True)
     dob = models.DateField()
