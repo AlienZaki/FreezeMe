@@ -38,15 +38,15 @@ def add_client(request):
     if request.method == 'POST':
         form = clientForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            #submit_async.delay()
+            client = form.save()
+
+            if form.data['auto_submit']:
+                # send to automation task manager
+                print('=> Auto Submit')
+                task_manager(client=client)
+
             return redirect('client_list')
         else:
-            client = Client.objects.first()
-
-            # send to automation task manager
-            task_manager(client=client)
-
             states = State.objects.all()
             context = {
                 'states': states,
@@ -72,6 +72,14 @@ class UpdateClientView(generic.UpdateView):
         states = State.objects.all()
         context['states'] = states
         return context
+
+    # def form_valid(self, form):
+    #     # This method is called when valid form data has been POSTed.
+    #     # It should return an HttpResponse.
+    #
+    #     #success_message = 'Success! We just sent you an email to confirm'
+    #     #messages.success(self.request, success_message)
+    #     return super().form_valid(form)
 
 
 
