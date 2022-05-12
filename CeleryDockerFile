@@ -19,7 +19,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # copy all project files to our work directory
-#COPY . /usr/src/app
+COPY . /usr/src/app
 
 # install requirements
 #RUN pip install -r requirements.txt
