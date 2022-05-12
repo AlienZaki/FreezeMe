@@ -44,6 +44,10 @@ def add_client(request):
         else:
             client_id = 1
             print('submit_async')
+            Submission.objects.create(
+                client_id=client_id,
+                website=Website.objects.first(),
+            )
             submit_async.delay(client_id)
             states = State.objects.all()
             context = {
