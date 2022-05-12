@@ -100,7 +100,6 @@ class Submission(models.Model):
     finish_time = models.DateTimeField(null=True, blank=True)
     finished = models.BooleanField(choices=FINISHED_CHOICES, default=False)
     succeed = models.BooleanField(choices=SUCCEED_CHOICES, default=False)
-
     def __str__(self):
         return f'{self.timestamp}'
 

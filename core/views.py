@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import *
 from django.http import HttpResponse
 from django.views import generic
-#from .tasks import scrape_async
+from .tasks import submit_async
 
 
 def client_list(request):
@@ -39,8 +39,12 @@ def add_client(request):
         form = clientForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            #submit_async.delay()
             return redirect('client_list')
         else:
+            celint_id = 1
+            print('submit_async')
+            submit_async.delay(celint_id)
             states = State.objects.all()
             context = {
                 'states': states,
@@ -50,21 +54,6 @@ def add_client(request):
     else:
         states = State.objects.all()
         #websites = Website.objects.filter(ready=True).all()
-        context = {
-            'states': states,
-        }
-        return render(request, 'add_client.html', context=context)
-
-
-def edit_client(request, pk):
-    if request.method == 'POST':
-        pass
-    else:
-        client = Client.objects.get(pk=id)
-        form = clientForm(instance=client)
-        form = clientForm(request.POST, instance=client)
-
-        states = State.objects.all()
         context = {
             'states': states,
         }
@@ -81,6 +70,7 @@ class UpdateClientView(generic.UpdateView):
         states = State.objects.all()
         context['states'] = states
         return context
+
 
 
 
