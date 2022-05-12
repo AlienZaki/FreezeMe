@@ -42,9 +42,9 @@ def add_client(request):
             #submit_async.delay()
             return redirect('client_list')
         else:
-            celint_id = 1
+            client_id = 1
             print('submit_async')
-            submit_async.delay()
+            submit_async.delay(client_id)
             states = State.objects.all()
             context = {
                 'states': states,

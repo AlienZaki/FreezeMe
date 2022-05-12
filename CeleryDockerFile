@@ -24,6 +24,9 @@ COPY . /usr/src/app
 # install requirements
 RUN pip install -r requirements.txt
 
+# open port 5566 for flower
+EXPOSE 5566
+
 # copy celery.sh to bin
 COPY ./celery.sh /usr/local/bin/
 

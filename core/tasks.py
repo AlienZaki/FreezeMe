@@ -4,9 +4,8 @@ from .models import Submission, Website
 
 
 @shared_task
-def submit_async():
-    #sleep(10)
-    client_id = 1
+def submit_async(client_id):
+    sleep(10)
     Submission.objects.create(
         client_id=client_id,
         website=Website.objects.first(),

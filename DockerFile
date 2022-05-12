@@ -24,7 +24,7 @@ COPY . /usr/src/app
 # install requirements
 RUN pip install -r requirements.txt
 
-# open port 80 to use it
+# open port 80 for django
 EXPOSE 80
 
 # copy runserver.sh to bin
