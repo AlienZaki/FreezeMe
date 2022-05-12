@@ -47,8 +47,6 @@ def add_client(request):
                 'form': form
             }
             return render(request, 'add_client.html', context=context)
-            return HttpResponse(form.errors)
-
     else:
         states = State.objects.all()
         #websites = Website.objects.filter(ready=True).all()
@@ -67,9 +65,7 @@ def edit_client(request, pk):
         form = clientForm(request.POST, instance=client)
 
         states = State.objects.all()
-        websites = Website.objects.filter(ready=True).all()
         context = {
-            'websites': websites,
             'states': states,
         }
         return render(request, 'add_client.html', context=context)
@@ -79,6 +75,12 @@ class UpdateClientView(generic.UpdateView):
     model = Client
     template_name = 'add_client.html'
     form_class = clientForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        states = State.objects.all()
+        context['states'] = states
+        return context
 
 
 

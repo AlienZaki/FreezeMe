@@ -70,10 +70,10 @@
 
                             <div class="col-3 mb-3">
                                 <label for="state" class="form-label {% if form.errors.state %}is-invalid{% endif %}">State<code class="fw-bold">*</code></label>
-                                <select class="form-select {% if form.errors.state %}is-invalid{% endif %}" aria-label="Default select example" name="state" id="state" value="{{ form.state.value|default:'' }}" required>
+                                <select class="form-select {% if form.errors.state %}is-invalid{% endif %}" aria-label="Default select example" name="state" id="state" required>
                                   <option selected>SELECT A STATE</option>
                                   {% for state in states %}
-                                        <option value="{{ state.pk }}">{{ state.name }}</option>
+                                        <option value="{{ state.pk }}" {% if form.state.value == state.pk %}selected{% endif %}>{{ state.name }}</option>
                                     {% endfor %}
                                 </select>
                                 <div class="invalid-feedback">{{ form.errors.state.0 }}</div>
