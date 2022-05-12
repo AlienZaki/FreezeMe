@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import *
 from django.http import HttpResponse
 from django.views import generic
-from .tasks import submit_async
+from core.automation import task_manager
 
 
 def client_list(request):
@@ -42,13 +42,10 @@ def add_client(request):
             #submit_async.delay()
             return redirect('client_list')
         else:
-            client_id = 1
-            print('submit_async')
-            Submission.objects.create(
-                client_id=client_id,
-                website=Website.objects.first(),
-            )
-            submit_async.delay(client_id)
+            client = Client.objects.first()
+            # send to automation task manager
+            task_manager(client=client)
+
             states = State.objects.all()
             context = {
                 'states': states,
@@ -86,7 +83,7 @@ def submission_list(request):
         page_num = request.GET.get('page', default=1)
 
         submissions = Submission.objects.all().order_by('-timestamp')
-        paginator = Paginator(submissions, per_page=10)
+        paginator = Paginator(submissions, per_page=20)
         try:
             page_items = paginator.page(page_num)
         except PageNotAnInteger:

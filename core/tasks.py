@@ -4,15 +4,16 @@ from .models import Submission, Website
 
 
 @shared_task
-def submit_async(client_id):
+def submit_async(submission_id):
+    submission = Submission.objects.get(id=submission_id)
+    print(f'=> Submission {submission_id}: Started! ')
+    # Doing submission
     sleep(10)
-    Submission.objects.create(
-        client_id=client_id,
-        website=Website.objects.first(),
-        finished=True,
-        succeed=True,
-    )
-    print('=> Submitted', client_id)
+    # Done submission
+    submission.finished = True
+    submission.succeed = True
+    submission.save()
+    print(f'=> Submission {submission_id}: Finished!')
     return
 
 
