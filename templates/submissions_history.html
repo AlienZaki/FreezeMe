@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="d-flex align-items-center px-3 my-4 text-white bg-secondary bg-gradient rounded shadow-sm">
+    <div class="d-flex align-items-center px-3 my-4 text-white bg-indigo bg-gradient rounded shadow-sm">
 {#                <i class="fa-solid fa-robot fa-2x"></i>#}
 {#            <i class="bi bi-robot pe-2" style="font-size: 40px;"></i>#}
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-robot my-2" viewBox="0 0 16 16">
@@ -9,24 +9,24 @@
               <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"/>
             </svg>
 
-            <div class="lh-1 px-4 border-end">
-                <h1 class="h6 mb-0 text-white lh-1">{{ processing }}</h1>
-                <small>Processing</small>
+            <div class="lh-1 px-4 border-end text-center">
+                <h1 class="h6 mb-1 text-white lh-1">{{ processing }}</h1>
+                <p class="mb-0"><small>PENDING</small></p>
             </div>
 
             <div class="lh-1 px-4">
-                <h1 class="h6 mb-0 text-white lh-1">{{ finished }}</h1>
-                <small>Finished</small>
+                <h1 class="h6 mb-1 text-white lh-1 text-center">{{ finished }}</h1>
+                <p class="mb-0"><small>TOTAL</small></p>
             </div>
 
             <div class="lh-1 px-4">
-                <h1 class="h6 mb-0 text-white lh-1">{{ succeed }}</h1>
-                <small>Succeed</small>
+                <h1 class="h6 mb-1 text-white lh-1 text-center">{{ succeed }}</h1>
+                <p class="mb-0"><small>SUBMITTED</small></p>
             </div>
 
             <div class="lh-1 px-4">
-                <h1 class="h6 mb-0 text-white lh-1">{{ failed }}</h1>
-                <small>Failed</small>
+                <h1 class="h6 mb-1 text-white lh-1 text-center">{{ failed }}</h1>
+                <p class="mb-0"><small>FAILED</small></p>
             </div>
         </div>
 
@@ -41,25 +41,38 @@
                     <th scope="col">Started at</th>
                     <th scope="col">Finished at</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Succeed</th>
+                    <th scope="col">Submitted</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in submissions %}
                     <tr>
-                        <td scope="row">{{ item.client.full_name }}</td>
-                        <td>{{ item.website.name }}</td>
-                        <td>{{ item.timestamp|date:"m/d/Y h:i A" }}</td>
-                        <td>{{ item.finish_time|date:"m/d/Y h:i A"|default:'-' }}</td>
-                        <td><span class="badge bg-{% if item.finished %}success{% else %}warning{% endif %}">{{ item.finished }}</span></td>
-                        <td><span class="badge bg-{% if item.succeed %}success{% elif item.finished  %}danger{% endif %}">{{ item.succeed }}</span></td>
-                        <td>
+                        <td scope="row" class="align-middle">{{ item.client.full_name }}</td>
+                        <td class="align-middle">{{ item.website.name }}</td>
+                        <td class="align-middle">{{ item.timestamp|date:"m/d/Y h:i A" }}</td>
+                        <td class="align-middle">{{ item.finish_time|date:"m/d/Y h:i A"|default:'-' }}</td>
+                        <td class="align-middle">
+                            <h5 class="badge {% if item.finished %}bg-success{% else %}bg-secondary {% endif %} mb-0 rounded-0">{{ item.get_finished_display }}</h5>
+                        </td>
+                        <td class="align-middle">
+
+                            {% if item.finished and item.succeed %}
+                                <span class="text-success">
+                                    <i class="bi bi-check-circle-fill mx-2"></i>{{ item.get_succeed_display|upper }}
+                                </span>
+                            {% elif item.finished and not item.succeed %}
+                                <span class="text-danger">
+                                    <i class="bi bi-x-circle-fill mx-2"></i>{{ item.get_succeed_display|upper }}
+                                </span>
+                            {% else %}
+                                <div class="spinner-grow text-muted spinner-grow-sm mx-2" role="status"></div>
+                            {% endif %}
+
+                        </td>
+                        <td class="align-middle">
                             {% if item.finished and not item.succeed %}
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></a>
-                                </form>
+                               <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></a>
                             {% endif %}
                         </td>
 

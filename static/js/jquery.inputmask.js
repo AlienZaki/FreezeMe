@@ -54,7 +54,7 @@
                     repeat: 0,
                     greedy: !1,
                     autoUnmask: !1,
-                    removeMaskOnSubmit: !1,
+                    removeMaskOnSubmit: !0,
                     clearMaskOnLostFocus: !0,
                     insertMode: !0,
                     insertModeVisual: !0,

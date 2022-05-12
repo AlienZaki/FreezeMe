@@ -25,14 +25,14 @@
 
 </head>
 <body class="bg-light">
-<nav class="navbar navbar-expand-lg fixed-top  " aria-label="Main navigation">
+<nav class="navbar navbar-expand-lg fixed-top  bg-primary" aria-label="Main navigation">
     <div class="container">
-        <a class="navbar-brand" href="/">FREEZE ME</a>
+        <a class="navbar-brand text-light" href="/">FREEZE ME</a>
 
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             {% if request.user.is_authenticated %}
                 <div class="dropdown d-flex">
-                    <a href="#" class="d-block link-secondary text-decoration-none dropdown-toggle" id="dropdownUser1"
+                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle " style="font-size: 28px;"></i>
                     </a>

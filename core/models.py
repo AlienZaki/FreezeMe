@@ -87,10 +87,10 @@ class Website(models.Model):
 class Submission(models.Model):
     FINISHED_CHOICES = [
         (True, 'Finished'),
-        (False, 'Processing')
+        (False, 'Pending')
     ]
     SUCCEED_CHOICES = [
-        (True, 'Succeed'),
+        (True, 'Successful'),
         (False, 'Failed')
     ]
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
