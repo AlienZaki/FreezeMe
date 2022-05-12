@@ -24,8 +24,12 @@ COPY . /usr/src/app
 # install requirements
 RUN pip install -r requirements.txt
 
-# copy celery.sh to bin
-COPY ./celery.sh /usr/local/bin/
+# open port 80 to use it
+EXPOSE 80
 
-# run
-CMD ["sh", "celery.sh"]
+# copy runserver.sh to bin
+COPY ./runserver.sh /usr/local/bin/
+
+# run - migrate, load data, and run
+CMD ["sh","runserver.sh"]
+
