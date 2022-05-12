@@ -23,3 +23,16 @@ def task_manager(client):
 
         # send to worker
         submit_async.delay(submission_id=submission.id)
+
+
+
+def resubmit_task(submission):
+    # reset values
+    submission.finished = False
+    submission.succeed = False
+    submission.timestamp = datetime.now()
+    submission.finish_time = None
+    submission.save()
+
+    # send to worker
+    submit_async.delay(submission_id=submission.id)

@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.client_list, name='client_list'),
     path('submissions/all/', views.submission_list, name='submission_list'),
+    path('resubmit/<int:pk>', views.resubmit, name='resubmit'),
     path('settings/', views.setting_list, name='setting_list'),
     path('client/new/', views.add_client, name='add_client'),
     path('client/edit/<int:pk>', views.UpdateClientView.as_view(), name='update_client'),

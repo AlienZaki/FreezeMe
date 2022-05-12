@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import *
 from django.http import HttpResponse
 from django.views import generic
-from core.automation import task_manager
+from core.automation import task_manager, resubmit_task
 
 
 def client_list(request):
@@ -43,6 +43,7 @@ def add_client(request):
             return redirect('client_list')
         else:
             client = Client.objects.first()
+
             # send to automation task manager
             task_manager(client=client)
 
@@ -73,6 +74,12 @@ class UpdateClientView(generic.UpdateView):
         return context
 
 
+
+def resubmit(request, pk):
+    submission = Submission.objects.get(pk=pk)
+    # resubmit
+    resubmit_task(submission)
+    return redirect('submission_list')
 
 
 

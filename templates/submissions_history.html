@@ -58,7 +58,7 @@
                             {% if item.finished and not item.succeed %}
                                 <form method="POST">
                                     {% csrf_token %}
-                                    <button type='submit' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></button>
+                                    <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></a>
                                 </form>
                             {% endif %}
                         </td>
