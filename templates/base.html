@@ -59,8 +59,8 @@
 <div class="bg-body shadow-sm">
     <nav class="container nav nav-underline" aria-label="Secondary navigation">
 
-        <a class="nav-link {% if request.resolver_match.url_name == '#' %} active text-primary{% endif %}"
-           aria-current="page" href="/"><i class="fa-solid fa-gauge mx-2"></i>Dashboard</a>
+{#        <a class="nav-link {% if request.resolver_match.url_name == '#' %} active text-primary{% endif %}"#}
+{#           aria-current="page" href="/"><i class="fa-solid fa-gauge mx-2"></i>Dashboard</a>#}
         <a class="nav-link{% if request.resolver_match.url_name == 'client_list' %} active text-primary {% endif %}"
            href="{% url 'client_list' %}"><i class="fa-solid fa-user-group mx-2"></i>Clients
             {#                <span class="badge bg-secondary  rounded-pill align-text-bottom">27</span>#}
