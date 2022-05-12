@@ -50,8 +50,8 @@
                     <tr>
                         <td scope="row" class="align-middle">{{ item.client.full_name }}</td>
                         <td class="align-middle">{{ item.website.name }}</td>
-                        <td class="align-middle">{{ item.timestamp|date:"m/d/Y h:i A" }}</td>
-                        <td class="align-middle">{{ item.finish_time|date:"m/d/Y h:i A"|default:'-' }}</td>
+                        <td class="align-middle">{{ item.timestamp|date:"m/d/Y h:i:s A" }}</td>
+                        <td class="align-middle">{{ item.finish_time|date:"m/d/Y h:i:s A"|default:'-' }}</td>
                         <td class="align-middle">
                             <h5 class="badge {% if item.finished %}bg-success{% else %}bg-secondary {% endif %} mb-0 rounded-0">{{ item.get_finished_display }}</h5>
                         </td>
