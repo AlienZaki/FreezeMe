@@ -41,13 +41,18 @@ def add_client(request):
             form.save()
             return redirect('client_list')
         else:
+            states = State.objects.all()
+            context = {
+                'states': states,
+                'form': form
+            }
+            return render(request, 'add_client.html', context=context)
             return HttpResponse(form.errors)
 
     else:
         states = State.objects.all()
-        websites = Website.objects.filter(ready=True).all()
+        #websites = Website.objects.filter(ready=True).all()
         context = {
-            'websites': websites,
             'states': states,
         }
         return render(request, 'add_client.html', context=context)
