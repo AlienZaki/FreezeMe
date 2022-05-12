@@ -6,14 +6,14 @@ from .models import Submission, Website
 @shared_task
 def submit_async():
     #sleep(10)
-    celint_id = 1
+    client_id = 1
     Submission.objects.create(
-        celint_id=celint_id,
+        client_id=client_id,
         website=Website.objects.first(),
         finished=True,
         succeed=True,
     )
-    print('=> Submitted', celint_id)
+    print('=> Submitted', client_id)
     return
 
 
