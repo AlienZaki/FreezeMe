@@ -3,7 +3,7 @@
 {% block content %}
     <div class="card my-5 shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center border-0">
-            <h5>Clients</h5>
+            <h5>CLIENTS</h5>
             <a class="btn btn-primary btn-sm" href="{% url 'add_client' %}">
                 <i class="fa-solid fa-user-plus me-2"></i>
                 Add Client</a>
@@ -23,16 +23,16 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Name</th>
+                    <th scope="col">NAME</th>
                     <th scope="col">SSN</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">PHONE</th>
+                    <th scope="col">CITY</th>
+                    <th scope="col">STATE</th>
 {#                    <th scope="col">Zip</th>#}
-                    <th scope="col">Address</th>
+                    <th scope="col">ADDRESS</th>
 {#                        <th scope="col">DOB</th>#}
-                    <th scope="col">Freeze date</th>
+                    <th scope="col">FREEZE DATE</th>
 {#                        <th scope="col">End freeze</th>#}
 {#                        <th scope="col">Succeed Submissions</th>#}
 {#                        <th scope="col">Failed Submissions</th>#}
@@ -42,16 +42,16 @@
                 <tbody>
                 {% for item in clients %}
                     <tr>
-                        <td scope="row">{{ item.fname }} {{ item.lname }}</td>
-                        <td scope="row">{{ item.ssn }}</td>
-                        <td scope="row">{{ item.email }}</td>
-                        <td scope="row">{{ item.phone|default:'-' }}</td>
-                        <td scope="row">{{ item.city }}</td>
-                        <td scope="row">{{ item.state }}</td>
+                        <td scope="row" class="align-middle text-truncate">{{ item.fname }} {{ item.lname }}</td>
+                        <td scope="row" class="align-middle">{{ item.ssn }}</td>
+                        <td scope="row" class="align-middle text-truncate">{{ item.email }}</td>
+                        <td scope="row" class="align-middle">{{ item.phone|default:'-' }}</td>
+                        <td scope="row" class="align-middle">{{ item.city }}</td>
+                        <td scope="row" class="align-middle">{{ item.state }}</td>
 {#                        <td scope="row">{{ item.zip }}</td>#}
-                        <td scope="row text-truncate">{{ item.address_line1 }}</td>
+                        <td scope="row" class="align-middle text-truncate">{{ item.address_line1 }}</td>
 {#                            <td scope="row">{{ item.dob }}</td>#}
-                        <td scope="row">{{ item.freeze_date|date:"m/d/Y" }}</td>
+                        <td scope="row" class="align-middle">{{ item.freeze_date|date:"m/d/Y" }}</td>
 {#                            <td scope="row">{{ item.end_freeze_date|default:'-' }}</td>#}
 {#                            <td><a href="{{ item.id_card.url }}" target="_blank">View</a></td>#}
 {#                            <td><a href="{{ item.passport.url }}" target="_blank">View</a></td>#}
@@ -72,7 +72,7 @@
             </table>
 
         </div>
-        <div class="card-footer text-muted">
+        <div class="card-footer text-muted border-0">
             <div class="d-flex justify-content-between align-items-center">
 
                 <span>Showing: {{ clients|length }} of {{ clients.paginator.count }} records</span>
