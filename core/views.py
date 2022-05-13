@@ -40,7 +40,7 @@ def add_client(request):
         if form.is_valid():
             client = form.save()
 
-            if form.data['auto_submit']:
+            if 'auto_submit' in form.data:
                 # send to automation task manager
                 print('=> Auto Submit')
                 task_manager(client=client)
@@ -52,19 +52,19 @@ def add_client(request):
                 'states': states,
                 'form': form
             }
-            return render(request, 'add_client.html', context=context)
+            return render(request, 'client_form.html', context=context)
     else:
         states = State.objects.all()
         #websites = Website.objects.filter(ready=True).all()
         context = {
             'states': states,
         }
-        return render(request, 'add_client.html', context=context)
+        return render(request, 'client_form.html', context=context)
 
 
 class UpdateClientView(generic.UpdateView):
     model = Client
-    template_name = 'add_client.html'
+    template_name = 'client_form.html'
     form_class = clientForm
 
     def get_context_data(self, **kwargs):
@@ -119,7 +119,7 @@ def submission_list(request):
             'failed': failed
 
         }
-        return render(request, 'submissions_history.html', context=context)
+        return render(request, 'submissions_list.html', context=context)
 
 
 def setting_list(request):

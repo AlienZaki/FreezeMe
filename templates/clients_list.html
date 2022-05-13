@@ -30,10 +30,10 @@
                     <th scope="col">Phone</th>
                     <th scope="col">City</th>
                     <th scope="col">State</th>
-                    <th scope="col">Zip</th>
+{#                    <th scope="col">Zip</th>#}
                     <th scope="col">Address</th>
 {#                        <th scope="col">DOB</th>#}
-                    <th scope="col">Start freeze</th>
+                    <th scope="col">Freeze date</th>
 {#                        <th scope="col">End freeze</th>#}
 {#                        <th scope="col">Succeed Submissions</th>#}
 {#                        <th scope="col">Failed Submissions</th>#}
@@ -49,7 +49,7 @@
                         <td scope="row">{{ item.phone|default:'-' }}</td>
                         <td scope="row">{{ item.city }}</td>
                         <td scope="row">{{ item.state }}</td>
-                        <td scope="row">{{ item.zip }}</td>
+{#                        <td scope="row">{{ item.zip }}</td>#}
                         <td scope="row text-truncate">{{ item.address_line1 }}</td>
 {#                            <td scope="row">{{ item.dob }}</td>#}
                         <td scope="row">{{ item.freeze_date|date:"m/d/Y" }}</td>

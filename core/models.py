@@ -24,6 +24,16 @@ def upload_residencies(instance, filename):
     return f'uploads/Residencies/residency_{instance.ssn}.{extension}'
 
 
+def upload_ssn_card(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/SSN/ssn_card_{instance.ssn}.{extension}'
+
+
+def upload_utility_bill(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'uploads/Utility/utility_bill_{instance.ssn}.{extension}'
+
+
 class Client(models.Model):
     fname = models.CharField(max_length=255)
     mname = models.CharField(max_length=255, null=True, blank=True)
@@ -44,6 +54,10 @@ class Client(models.Model):
     passport = models.ImageField(upload_to=upload_passport, null=True, blank=True)
     driver_license = models.ImageField(upload_to=upload_driver, null=True, blank=True)
     residency = models.ImageField(upload_to=upload_residencies, null=True, blank=True)
+    ssn_card = models.ImageField(upload_to=upload_ssn_card, null=True, blank=True)
+    utility_bill = models.ImageField(upload_to=upload_utility_bill, null=True, blank=True)
+
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -102,7 +116,7 @@ class Submission(models.Model):
     succeed = models.BooleanField(choices=SUCCEED_CHOICES, default=False)
 
     def __str__(self):
-        return f'{self.timestamp}'
+        return f'{self.client} - {self.website}'
 
 
 class Requirement(models.Model):
