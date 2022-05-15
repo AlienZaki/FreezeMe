@@ -1,9 +1,12 @@
 from twocaptcha import TwoCaptcha
+from core.models import Settings
 
 
 class CaptchaSolver:
 
-    def __init__(self, api_key):
+    def __init__(self):
+        api_key = Settings.objects.first().captcha_key
+        print(api_key)
         self.solver = TwoCaptcha(api_key)
 
     def solve_recaptcha(self, site_key, url):
@@ -12,4 +15,4 @@ class CaptchaSolver:
 
 
 if __name__ == '__main__':
-    CaptchaSolver(api_key='sdfsdf')
+    CaptchaSolver()

@@ -17,6 +17,7 @@ urlpatterns = [
 
     # Debug Toolbar
     path('__debug__/', include('debug_toolbar.urls')),
+    path('test/', views.test, name='test'),
 ]
 
 

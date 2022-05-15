@@ -12,6 +12,11 @@ from core.automation import task_manager, resubmit_task
 import traceback
 
 
+def test(request):
+    res = 'sss'
+    return HttpResponse(res)
+
+
 def client_list(request):
     if request.method == 'POST':
         pass

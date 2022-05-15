@@ -1,7 +1,7 @@
 import os, django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FreezeMe.settings")
 django.setup()
-from settings.models import Settings
+from core.models import Settings
 from captcha import CaptchaSolver
 import requests, json
 from twocaptcha import TwoCaptcha
