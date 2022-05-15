@@ -39,6 +39,7 @@
                     <th scope="col">FINISHED AT</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">RESULT</th>
+                    <th scope="col">NOTE</th>
 
                 </tr>
                 </thead>
@@ -67,6 +68,7 @@
                             {% endif %}
 
                         </td>
+                        <td class="align-middle">{{ item.website.name }}</td>
                         <td class="align-middle">
                             {% if item.finished and not item.succeed %}
                                <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></a>
