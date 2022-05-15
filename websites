@@ -1,33 +1,51 @@
+Corelogic - Done
+https://teletrackfreeze.corelogic.com/
+
 
 Lexis Nexis
 https://forms.consumer.risk.lexisnexis.com/#/freeze-self
+- State of residence
+- Upload problem, selenium
+
 
 Innovis
 https://innovis.com/securityFreeze/index
+- Are you a victim of identity theft?*
+- Unable to Process Your Request: Innovis is unable to process your request at this time. You can request your Security Freeze by Mail.
+
 
 ARS
 https://www.ars-consumeroffice.com/add
+- Upload problem, selenium
+
 
 Chexsystem
 https://www.chexsystems.com/web/chexsystems/consumerdebit/page/securityfreeze/placefreeze/!ut/p/z1/pZHJDoJADIafxQNHbVnidptExAW3oBF7MYCIRGUIoMa3d4gXJYomNOmh7fenGxDYQJFzDQMnC3nknES8oeYWWY_JmoXmbLBUkOm6aajKWDY6KqxLgYUG9Fo25rO-KE-mbWtlKjhuFvUFAFt_6r8Yw2r9BUBV9hcAlY-3Biptocs_gPzEpUvmN_w1xQgoOHH3-XAWuWo7AEr8vZ_4SeOSiPQhy-K0K6GEu4t3zD3gDY-fJfwkOfA0A_udhPi8EmZjOKyTe7_VHijfqFc!/dz/d5/L2dBISEvZ0FBIS9nQSEh/
 
-Credco
-https://teletrackfreeze.corelogic.com/
+
 
 Clarity
 https://consumers.clarityservices.com/idv?type=PLACE_SECURITY_FREEZE
+- Invalid Address: The address you provided could not be formatted into a deliverable US address.
+
 
 Factor Trust
 https://lendprotect.transunion.com/Consumer/CreditFreeze/PersonInfo.aspx
 - Have you lived there for over 6 months?
-- error
+- We are unable to complete your request.
+
 
 Telecom & Utility
 https://www.exchangeservicecenter.com/Freeze/
+- Additional Information Required: We're sorry...we cannot process your online request concerning an Exchange Service Center security freeze.
+
 
 Certegy
 certegyitsm.saasit.com
+- Needs login
 
-Service Catalog
+
 TransUnion Freeze
 https://www.transunion.com/credit-freeze
+- Have you lived here for more than 6 months?
+- Needs to continue signup

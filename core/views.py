@@ -10,10 +10,15 @@ from django.http import HttpResponse
 from django.views import generic
 from core.automation import task_manager, resubmit_task
 import traceback
+from .automation.corelogic import Corelogic
 
 
 def test(request):
-    res = 'sss'
+    try:
+        success, msg = Corelogic().submit(fname='asssd', lname='sdfsdfb', email='cdfdsdf.df@dfdfgfdg.fg')
+        res = f'{success} - {msg}'
+    except Exception as e:
+        res = e
     return HttpResponse(res)
 
 
