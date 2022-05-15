@@ -6,8 +6,8 @@ from core.models import Settings
 class CaptchaSolver:
 
     def __init__(self):
-        #api_key = Settings.objects.first().captcha_key
-        api_key = '33ca5f964f70eda0c6f94241150e33e9'
+        api_key = Settings.objects.first().captcha_key
+        #api_key = '33ca5f964f70eda0c6f94241150e33e9'
         self.solver = TwoCaptcha(api_key)
 
     def solve_recaptcha(self, site_key, url):
