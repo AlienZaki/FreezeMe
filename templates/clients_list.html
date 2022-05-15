@@ -23,14 +23,15 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">NAME</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
                     <th scope="col">SSN</th>
                     <th scope="col">EMAIL</th>
                     <th scope="col">PHONE</th>
                     <th scope="col">CITY</th>
-                    <th scope="col">STATE</th>
+{#                    <th scope="col">STATE</th>#}
 {#                    <th scope="col">Zip</th>#}
-                    <th scope="col">ADDRESS</th>
+{#                    <th scope="col">ADDRESS</th>#}
 {#                        <th scope="col">DOB</th>#}
                     <th scope="col">FREEZE DATE</th>
 {#                        <th scope="col">End freeze</th>#}
@@ -42,14 +43,15 @@
                 <tbody>
                 {% for item in clients %}
                     <tr>
-                        <td scope="row" class="align-middle text-truncate">{{ item.fname }} {{ item.lname }}</td>
+                        <td scope="row" class="align-middle text-truncate">{{ item.fname }}</td>
+                        <td scope="row" class="align-middle text-truncate">{{ item.lname }}</td>
                         <td scope="row" class="align-middle">{{ item.ssn }}</td>
                         <td scope="row" class="align-middle text-truncate">{{ item.email }}</td>
                         <td scope="row" class="align-middle">{{ item.phone|default:'-' }}</td>
                         <td scope="row" class="align-middle">{{ item.city }}</td>
-                        <td scope="row" class="align-middle">{{ item.state }}</td>
+{#                        <td scope="row" class="align-middle">{{ item.state }}</td>#}
 {#                        <td scope="row">{{ item.zip }}</td>#}
-                        <td scope="row" class="align-middle text-truncate">{{ item.address_line1 }}</td>
+{#                        <td scope="row" class="align-middle text-truncate">{{ item.address_line1 }}</td>#}
 {#                            <td scope="row">{{ item.dob }}</td>#}
                         <td scope="row" class="align-middle">{{ item.freeze_date|date:"m/d/Y" }}</td>
 {#                            <td scope="row">{{ item.end_freeze_date|default:'-' }}</td>#}
@@ -75,15 +77,15 @@
         <div class="card-footer text-muted border-0">
             <div class="d-flex justify-content-between align-items-center">
 
-                <span>Showing: {{ clients|length }} of {{ clients.paginator.count }} records</span>
+                <span>Showing: {{ clients|length }} of {{ total_count }} records</span>
 
                 {% if clients %}
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-end mb-0">
 
-                            {% if clients.has_previous %}
+                            {% if page_obj.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ clients.previous_page_number }}">Previous</a>
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
                                 </li>
                             {% else %}
                                 <li class="page-item disabled">
@@ -93,11 +95,11 @@
 
 
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ clients.number }}">{{ clients.number }}</a>
+                                <a class="page-link" href="?page={{ page_obj.number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page_obj.number }}</a>
                             </li>
-                            {% if clients.has_next %}
+                            {% if page_obj.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ clients.next_page_number }}">Next</a>
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
                                 </li>
                             {% else %}
                                 <li class="page-item disabled">

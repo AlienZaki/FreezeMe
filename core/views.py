@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from django.shortcuts import reverse, redirect
 from .models import Client, Website, Requirement, Submission, Settings
 from state.models import State
@@ -9,6 +9,7 @@ from .forms import *
 from django.http import HttpResponse
 from django.views import generic
 from core.automation import task_manager, resubmit_task
+import traceback
 
 
 def client_list(request):
@@ -32,6 +33,23 @@ def client_list(request):
             'clients': page_items,
         }
         return render(request, 'clients_list.html', context=context)
+
+
+class ClientListView(generic.ListView):
+    model = Client
+    template_name = 'clients_list.html'
+    context_object_name = 'clients'
+    paginate_by = 20
+
+    def get_queryset(self):
+        ssn = self.request.GET.get('q') or ''
+        qs = super().get_queryset().filter(ssn__contains=ssn)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_count'] = self.get_queryset().count()
+        return context
 
 
 def add_client(request):

@@ -7,12 +7,13 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.client_list, name='client_list'),
+    path('', views.ClientListView.as_view(), name='client_list'),
     path('submissions/all/', views.submission_list, name='submission_list'),
     path('resubmit/<int:pk>', views.resubmit, name='resubmit'),
-    path('settings/', views.setting_list, name='setting_list'),
+    #path('client/<int:pk>/submissions/', views.client_submissions, name='client_submissions'),
     path('client/new/', views.add_client, name='add_client'),
     path('client/edit/<int:pk>', views.UpdateClientView.as_view(), name='update_client'),
+    path('settings/', views.setting_list, name='setting_list'),
 
     # Debug Toolbar
     path('__debug__/', include('debug_toolbar.urls')),
