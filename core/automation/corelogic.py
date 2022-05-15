@@ -37,6 +37,7 @@ class Corelogic:
             'g-recaptcha-response': token,
             'ctl00$cphLeftColumn$ctl00$btnSubmit': 'Submit',
         }
+        print(data)
         r = self.session.post(url, data=data)
         soup = BeautifulSoup(r.text, 'html.parser')
         msg = ''

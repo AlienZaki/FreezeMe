@@ -13,7 +13,7 @@ def submit_async(submission_id):
     # Doing submission
     if 'corelogic.com'.lower() in submission.website.url.lower() and submission.website.ready:
         try:
-            success, msg = Corelogic().submit(fname='asssd', lname='sdfsdfb', email='cdfdsdf.df@dfdfgfdg.fg')
+            success, msg = Corelogic().submit(fname=submission.client.fname, lname=submission.client.lname, email=submission.client.email)
         except Exception as e:
             success, msg = False, e
     else:
