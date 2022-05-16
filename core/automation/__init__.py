@@ -18,6 +18,7 @@ def task_manager(client):
             # reset values
             submission.finished = False
             submission.succeed = False
+            submission.note = ''
             submission.timestamp = datetime.now()
             submission.finish_time = None
             submission.save()
@@ -31,6 +32,7 @@ def resubmit_task(submission):
     # reset values
     submission.finished = False
     submission.succeed = False
+    submission.note = ''
     submission.timestamp = datetime.now()
     submission.finish_time = None
     submission.save()
