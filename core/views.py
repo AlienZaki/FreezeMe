@@ -15,8 +15,9 @@ from .automation.corelogic import Corelogic
 
 def test(request):
     try:
-        success, msg = Corelogic().submit(fname='asssd', lname='sdfsdfb', email='cdfdsdf.df@dfdfgfdg.fg')
-        res = f'{success} - {msg}'
+        #success, msg = Corelogic().submit(fname='asssd', lname='sdfsdfb', email='cdfdsdf.df@dfdfgfdg.fg')
+        #res = f'{success} - {msg}'
+        res = Client.objects.get(id=1).id_card.url
     except Exception as e:
         res = e
     return HttpResponse(res)
