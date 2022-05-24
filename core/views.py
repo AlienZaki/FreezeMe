@@ -122,7 +122,7 @@ class SubmissionListView(generic.ListView):
     model = Submission
     context_object_name = 'submissions'
     template_name = 'submissions_list.html'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_queryset(self):
         if 'pk' in self.kwargs:
