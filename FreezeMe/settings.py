@@ -150,14 +150,14 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 if DEBUG is False:
     ALLOWED_HOSTS = [env("HOST")]
 
-    SESSION_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_REDIRECT_EXEMPT = []
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # SESSION_COOKIE_SECURE = True
+    # SECURE_BROWSER_XSS_FILTER = True
+    # SECURE_CONTENT_TYPE_NOSNIFF = True
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    # SECURE_HSTS_SECONDS = 31536000
+    # SECURE_REDIRECT_EXEMPT = []
+    # SECURE_SSL_REDIRECT = True
+    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Celery settings
     CELERY_BROKER_URL = env('CELERY_BROKER_URL')
@@ -182,6 +182,7 @@ if DEBUG is False:
     #DEFAULT_FILE_STORAGE = 'FreezeMe.storage_backends.PublicMediaStorage'
 
     #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
 
     DATABASES = {
         'default': {
