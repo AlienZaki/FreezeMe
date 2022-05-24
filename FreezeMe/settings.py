@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY', default='This-is-a-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=True)
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -143,6 +143,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+print(MEDIA_ROOT)
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
@@ -150,38 +151,39 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 if DEBUG is False:
     ALLOWED_HOSTS = [env("HOST")]
 
-    # SESSION_COOKIE_SECURE = True
-    # SECURE_BROWSER_XSS_FILTER = True
-    # SECURE_CONTENT_TYPE_NOSNIFF = True
-    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    # SECURE_HSTS_SECONDS = 31536000
-    # SECURE_REDIRECT_EXEMPT = []
-    # SECURE_SSL_REDIRECT = True
-    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_REDIRECT_EXEMPT = []
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Celery settings
-    CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+    #CELERY_BROKER_URL = env('CELERY_BROKER_URL')
 
     # aws settings
-    #AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-    #AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-    #AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = 'EQSKHBQO5GZOZQWUKPQF'  # env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = 'rj4HUAHAmXWvXXgOgtXQ+oWhPt8qFsrDyio+/rfq4+4'  #env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'freeze-me-space'     # env('AWS_STORAGE_BUCKET_NAME')
 
     #AWS_DEFAULT_ACL = None
-    #AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    #AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
+    #AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.nyc3.digitaloceanspaces.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
     # s3 static settings
-    #STATIC_LOCATION = 'static'
-    #STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    #STATICFILES_STORAGE = 'FreezeMe.storage_backends.StaticStorage'
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'    #'FreezeMe.storage_backends.StaticStorage'
 
     # s3 public media settings
-    #PUBLIC_MEDIA_LOCATION = 'media'
-    #MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    #DEFAULT_FILE_STORAGE = 'FreezeMe.storage_backends.PublicMediaStorage'
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'   #'FreezeMe.storage_backends.PublicMediaStorage'
 
-    #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
     DATABASES = {
