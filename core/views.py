@@ -23,27 +23,27 @@ def test(request):
     return HttpResponse(res)
 
 
-def client_list(request):
-    if request.method == 'POST':
-        pass
-    else:
-        page_num = request.GET.get('page', default=1)
-        query = request.GET.get('q', default=None)
-
-        clients = Client.objects.filter(ssn__contains=query) if query else Client.objects.all()
-        paginator = Paginator(clients, per_page=10)
-        try:
-            page_items = paginator.page(page_num)
-        except PageNotAnInteger:
-            page_items = paginator.page(1)
-        except EmptyPage:
-            page_items = paginator.page(paginator.num_pages)
-
-
-        context = {
-            'clients': page_items,
-        }
-        return render(request, 'clients_list.html', context=context)
+# def client_list(request):
+#     if request.method == 'POST':
+#         pass
+#     else:
+#         page_num = request.GET.get('page', default=1)
+#         query = request.GET.get('q', default=None)
+#
+#         clients = Client.objects.filter(ssn__contains=query) if query else Client.objects.all()
+#         paginator = Paginator(clients, per_page=10)
+#         try:
+#             page_items = paginator.page(page_num)
+#         except PageNotAnInteger:
+#             page_items = paginator.page(1)
+#         except EmptyPage:
+#             page_items = paginator.page(paginator.num_pages)
+#
+#
+#         context = {
+#             'clients': page_items,
+#         }
+#         return render(request, 'clients_list.html', context=context)
 
 
 class ClientListView(generic.ListView):

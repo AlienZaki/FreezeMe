@@ -144,7 +144,7 @@
                             <div class="col-4 mb-3">
                                 <label for="passport" class="form-label">Passport</label>
                                 {% if form.passport.value %}
-                                    <a class="float-end" href="/media/{{ form.passport.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.passport.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file" name="passport" id="passport" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
@@ -152,7 +152,7 @@
                             <div class="col-4 mb-3">
                                 <label for="id_card" class="form-label">State issued ID card</label>
                                 {% if form.id_card.value %}
-                                    <a class="float-end" href="/media/{{ form.id_card.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.id_card.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file" name="id_card" id="id_card" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
@@ -160,7 +160,7 @@
                             <div class="col-4 mb-3">
                                 <label for="driver_license" class="form-label">Driver's license</label>
                                 {% if form.driver_license.value %}
-                                    <a class="float-end" href="/media/{{ form.driver_license.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.driver_license.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file" name="driver_license" id="driver_license" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
@@ -170,7 +170,7 @@
                             <div class="col-4 mb-3">
                                 <label for="ssn_card" class="form-label">SSN Card</label>
                                 {% if form.ssn_card.value %}
-                                    <a class="float-end" href="/media/{{ form.ssn_card.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.ssn_card.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file"  name="ssn_card" id="ssn_card" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
@@ -178,7 +178,7 @@
                             <div class="col-4 mb-3">
                                 <label for="utility_bill" class="form-label">Utility bill</label>
                                 {% if form.utility_bill.value %}
-                                    <a class="float-end" href="/media/{{ form.utility_bill.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.utility_bill.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file"  name="utility_bill" id="utility_bill" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
@@ -186,7 +186,7 @@
                             <div class="col-4 mb-3">
                                 <label for="residency" class="form-label">Proof of Residency</label>
                                 {% if form.residency.value %}
-                                    <a class="float-end" href="/media/{{ form.residency.value|default:'' }}" target="_blank">View</a>
+                                    <a class="float-end" href="{{ form.instance.residency.url|default:'#' }}" target="_blank">View</a>
                                 {% endif %}
                                 <input class="form-control" type="file"  name="residency" id="residency" accept=".gif,.jpeg,.jpg,.png,.pdf">
                             </div>
