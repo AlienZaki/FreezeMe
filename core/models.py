@@ -50,12 +50,12 @@ class Client(models.Model):
     dob = models.DateField()
     freeze_date = models.DateField(null=True, blank=True, default=date.today)
     #end_freeze_date = models.DateField(null=True, blank=True)
-    id_card = models.ImageField(upload_to=upload_id, null=True, blank=True) #'uploads/ID/'
-    passport = models.ImageField(upload_to=upload_passport, null=True, blank=True)
-    driver_license = models.ImageField(upload_to=upload_driver, null=True, blank=True)
-    residency = models.ImageField(upload_to=upload_residencies, null=True, blank=True)
-    ssn_card = models.ImageField(upload_to=upload_ssn_card, null=True, blank=True)
-    utility_bill = models.ImageField(upload_to=upload_utility_bill, null=True, blank=True)
+    id_card = models.FileField(upload_to=upload_id, null=True, blank=True) #'uploads/ID/'
+    passport = models.FileField(upload_to=upload_passport, null=True, blank=True)
+    driver_license = models.FileField(upload_to=upload_driver, null=True, blank=True)
+    residency = models.FileField(upload_to=upload_residencies, null=True, blank=True)
+    ssn_card = models.FileField(upload_to=upload_ssn_card, null=True, blank=True)
+    utility_bill = models.FileField(upload_to=upload_utility_bill, null=True, blank=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True)
