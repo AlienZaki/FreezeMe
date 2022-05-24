@@ -68,10 +68,10 @@ def add_client(request):
         if form.is_valid():
             client = form.save()
 
-            if 'auto_submit' in form.data:
-                # send to automation task manager
-                print('=> Auto Submit')
-                task_manager(client=client)
+            #if 'auto_submit' in form.data:
+            # send to automation task manager
+            print('=> Auto Submit')
+            task_manager(client=client)
 
             return redirect('client_list')
         else:
@@ -117,6 +117,30 @@ def resubmit(request, pk):
     resubmit_task(submission)
     return redirect('submission_list')
 
+
+class SubmissionListView(generic.ListView):
+    model = Submission
+    context_object_name = 'submissions'
+    template_name = 'submissions_list.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        if 'pk' in self.kwargs:
+            client_id = self.kwargs['pk']
+            qs = super().get_queryset().filter(client_id=client_id)
+            return qs
+        else:
+            return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_count'] = self.get_queryset().count()
+        context['processing'] = self.get_queryset().filter(finished=False).count()
+        context['finished'] = self.get_queryset().filter(finished=True).count()
+        context['succeed'] = self.get_queryset().filter(succeed=True).count()
+        context['failed'] = self.get_queryset().filter(finished=True, succeed=False).count()
+
+        return context
 
 
 def submission_list(request):
