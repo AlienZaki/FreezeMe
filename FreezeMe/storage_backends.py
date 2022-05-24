@@ -8,5 +8,5 @@ class StaticStorage(S3Boto3Storage):
 
 class PublicMediaStorage(S3Boto3Storage):
     location = 'media'
-    default_acl = 'private'
-    file_overwrite = False
+    default_acl = 'publich'
+    file_overwrite = True
