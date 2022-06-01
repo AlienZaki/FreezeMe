@@ -80,7 +80,9 @@
                         </td>
                         <td class="align-middle">
                             {% if item.finished and not item.succeed %}
-                               <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-rotate-right"></i></a>
+                               <a href='{% url 'resubmit' item.pk %}' class="btn btn-outline-danger btn-sm">
+                                   <i class="fa-solid fa-rotate-right me-2"></i>Resubmit
+                               </a>
                             {% endif %}
                         </td>
 
