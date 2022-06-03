@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from .captcha import CaptchaSolver
+from .utils.captcha import CaptchaSolver
 
 
 class Corelogic:

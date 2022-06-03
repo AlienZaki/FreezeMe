@@ -1,4 +1,4 @@
-from .captcha import CaptchaSolver
+from .utils.captcha import CaptchaSolver
 from ..models import Client, Website, Submission, Settings, State
 from ..tasks import submit_async
 from datetime import datetime
