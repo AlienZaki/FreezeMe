@@ -60,11 +60,11 @@ class LexisNexis:
             'addresses[0][addressLine2]': address_line2 or '',
             'addresses[0][addressCity]': city,
             'addresses[0][addressState]': state_abbreviation,
-            'addresses[0][addressZip]': zip or '',
+            'addresses[0][addressZip]': zip[:5] or '',
             'addresses[0][addressZip4]': '',
             'addresses[0][abbreviate]': f'{address_line1} ... {state_abbreviation} {zip}',
         }
-
+        print(data)
         r = self.session.post(url, data=data)
 
         msg = ''

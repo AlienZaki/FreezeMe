@@ -1,5 +1,6 @@
 from django.test import TestCase
 from ..corelogic import Corelogic
+from ..lexisNexis import LexisNexis
 from ...models import Client, State, Settings
 
 
@@ -19,7 +20,7 @@ class AutomationScriptsTest(TestCase):
             zip="123456",
             address_line1="King street",
             address_line2=None,
-            phone=None,
+            phone='7103216541',
             email="test@domain.com",
             ssn="999999999",
             dob="1990-10-20",
@@ -34,9 +35,26 @@ class AutomationScriptsTest(TestCase):
         self.client = Client.objects.get(ssn='999999999')
 
     def test_LexisNexis(self):
-        pass
-
-    def test_Corelogic(self):
         client = self.client
-        r = Corelogic().submit(fname=client.fname, lname=client.lname, email=client.email)
-        print(r)
+        res = LexisNexis().submit(
+            fname=client.fname,
+            mname=client.mname,
+            lname=client.lname,
+            email=client.email,
+            phone=client.phone,
+            ssn=client.ssn,
+            address_line1=client.address_line1,
+            address_line2=client.address_line2,
+            zip=client.zip,
+            city=client.city,
+            state_abbreviation=client.state.abbreviation
+        )
+        print(res)
+        self.assertTrue(res[0])
+
+    # def test_Corelogic(self):
+    #     client = self.client
+    #     res = Corelogic().submit(fname=client.fname, lname=client.lname, email=client.email)
+    #     print(res)
+    #     self.assertTrue(res[0])
+    #     self.assertIn('Thank you', res[1])
