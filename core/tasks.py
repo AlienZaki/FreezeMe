@@ -12,12 +12,12 @@ def submit_async(submission_id):
     submission = Submission.objects.get(id=submission_id)
     print(f'=> Submission {submission_id}: Started! ')
     # Doing submission
-    if 'corelogic.com'.lower() in submission.website.url.lower() and submission.website.ready:
+    if 'corelogic.com'.lower() in submission.website.url.lower():
         try:
             success, msg = Corelogic().submit(fname=submission.client.fname, lname=submission.client.lname, email=submission.client.email)
         except Exception as e:
             success, msg = False, e
-    elif 'optout.lexisnexis.com'.lower() in submission.website.url.lower() and submission.website.ready:
+    elif 'optout.lexisnexis.com'.lower() in submission.website.url.lower():
         try:
             success, msg = LexisNexis().submit(
                 fname=submission.client.fname,
