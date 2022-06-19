@@ -1,7 +1,8 @@
 from django.test import TestCase
+from ...models import Client, State, Settings
 from ..corelogic import Corelogic
 from ..lexisNexis import LexisNexis
-from ...models import Client, State, Settings
+from ..ars_consumeroffice import ARS
 
 
 class AutomationScriptsTest(TestCase):
@@ -25,7 +26,7 @@ class AutomationScriptsTest(TestCase):
             ssn="999999999",
             dob="1990-10-20",
             freeze_date="2022-05-08",
-            id_card="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+            id_card="https://nyc3.digitaloceanspaces.com/freeze-me-space/media/uploads/Driver/driver_546970825.pdf",
             passport="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
             driver_license="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
             residency="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
@@ -34,9 +35,9 @@ class AutomationScriptsTest(TestCase):
     def setUp(self):
         self.client = Client.objects.get(ssn='999999999')
 
-    def test_LexisNexis(self):
+    def test_ars_consumeroffice(self):
         client = self.client
-        res = LexisNexis().submit(
+        res = ARS().submit(
             fname=client.fname,
             mname=client.mname,
             lname=client.lname,
@@ -47,10 +48,31 @@ class AutomationScriptsTest(TestCase):
             address_line2=client.address_line2,
             zip=client.zip,
             city=client.city,
-            state_abbreviation=client.state.abbreviation
+            state_abbreviation=client.state.abbreviation,
+            id_card=client.id_card,
+            passport=client.passport,
+            driver_license=client.driver_license
         )
         print(res)
-        self.assertTrue(res[0])
+        #self.assertTrue(res[0])
+
+    # def test_LexisNexis(self):
+    #     client = self.client
+    #     res = LexisNexis().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation
+    #     )
+    #     print(res)
+    #     self.assertTrue(res[0])
 
     # def test_Corelogic(self):
     #     client = self.client
