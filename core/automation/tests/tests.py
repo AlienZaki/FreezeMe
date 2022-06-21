@@ -4,6 +4,7 @@ from ..corelogic import Corelogic
 from ..lexisNexis import LexisNexis
 from ..ars_consumeroffice import ARS
 from ..innovis import Innovis
+from ..chexsystems import Chexsystems
 
 
 class AutomationScriptsTest(TestCase):
@@ -16,7 +17,7 @@ class AutomationScriptsTest(TestCase):
             fname="Yixian",
             mname="",
             suffix="",
-            lname="Li",
+            lname="Lu",
             city="Bayside",
             state=state,
             zip="11360",
@@ -24,8 +25,8 @@ class AutomationScriptsTest(TestCase):
             address_line2=None,
             phone='7103216541',
             email="eng.3bdo2020@gmail.com",
-            ssn="085982518",
-            dob="1987-06-20",
+            ssn="085980518",
+            dob="1987-07-20",
             freeze_date="2022-06-21",
             id_card="https://nyc3.digitaloceanspaces.com/freeze-me-space/media/uploads/Driver/driver_546970825.pdf",
             passport="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
@@ -34,7 +35,26 @@ class AutomationScriptsTest(TestCase):
         )
 
     def setUp(self):
-        self.client = Client.objects.get(ssn='085982518')
+        self.client = Client.objects.get(ssn='085980518')
+
+    # def test_chexsystems(self):
+    #     client = self.client
+    #     res = Chexsystems().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         dob=client.dob,
+    #     )
+    #     print(res)
+    #     #self.assertTrue(res[0])
 
     # def test_innovis(self):
     #     client = self.client

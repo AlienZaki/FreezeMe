@@ -1,60 +1,84 @@
-import requests
-from bs4 import BeautifulSoup
-
-session = requests.session()
-session.headers = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'Accept-Language': 'en-US,en;q=0.9,ar;q=0.8',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'Origin': 'https://www.chexsystems.com',
-    'Pragma': 'no-cache',
-    'Sec-Fetch-Dest': 'document',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'same-origin',
-    'Sec-Fetch-User': '?1',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36',
-    'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
-    'sec-gpc': '1',
-}
-r = session.get('https://www.chexsystems.com/web/chexsystems/consumerdebit/page/securityfreeze/placefreeze')
-post_url = r.url
-session.headers['Referer'] = post_url
-soup = BeautifulSoup(r.text, 'html.parser')
-captcha_image = 'https://www.chexsystems.com' + soup.select_one('#captcha_image').get('src')
-print(captcha_image)
-captcha = input('captcha:\n')
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import chromedriver_autoinstaller
+from selenium.webdriver.support.ui import Select
 
 
-data = {
-    'termsCondtn': 'agree',
-    'ageVerify': 'yes',
-    'firstName': 'McKenzie',
-    'middleName': '',
-    'lastName': 'Adams',
-    'dobMon': '10',
-    'dobDay': '28',
-    'dobYear': '1977',
-    'govtNbrPart1': '098',
-    'govtNbrPart2': '55',
-    'govtNbrPart3': '5678',
-    'vrfyGovtNbrPart1': '098',
-    'vrfyGovtNbrPart2': '55',
-    'vrfyGovtNbrPart3': '5678',
-    'driversLicense': '',
-    'addrLine1': '7710 Balboa Ave Ste 313',
-    'addrLine2': '',
-    'cityName': 'San Diego',
-    'stateCode': 'CA',
-    'postalCode': '92111',
-    'areaCode': '701',
-    'phonePrefix': '732',
-    'phoneSuffix': '0037',
-    'captchaText': captcha,
-}
-response = session.post(post_url, data=data)
 
-print(response.text, response.status_code)
+class TestSelenium:
+
+    def open_browser(self):
+      chromedriver_autoinstaller.install()
+      opt = webdriver.ChromeOptions()
+      opt.add_argument('--disable-blink-features=AutomationControlled')
+      opt.add_argument("--start-maximized")
+      opt.add_argument("--disable-blink-features")
+
+      opt.add_argument('--disable-cached')
+      opt.add_argument('--disable-dev-shm-usage')
+      opt.add_argument("--no-sandbox")
+      opt.add_argument("--disable-application-cache")
+      opt.add_argument("accept-language=en-GB,en;q=0.9,en-US;q=0.8")
+      opt.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36')
+      opt.add_argument("--start-maximized")
+      # opt.add_argument("--headless")
+      opt.add_argument("--window-size=1920,1080")
+
+      opt.add_experimental_option("excludeSwitches", ["enable-automation"])
+      opt.add_experimental_option('useAutomationExtension', False)
+      opt.add_experimental_option("windowTypes", ["webview"])
+
+      self.driver = webdriver.Chrome(options=opt)
+      self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+
+      self.driver.get('https://www.chexsystems.com/web/chexsystems/consumerdebit/page/securityfreeze/placefreeze')
+
+
+
+      self.driver.find_element(By.CSS_SELECTOR, '#optionAgree').click()
+      self.driver.find_element(By.CSS_SELECTOR, '#deniedYes').click()
+
+
+      self.driver.find_element(By.CSS_SELECTOR, '#firstName').send_keys('Yixian')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=lastName]').send_keys('Li')
+
+      self.driver.find_element(By.CSS_SELECTOR, '#dobMon').send_keys('06')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=dobDay]').send_keys('20')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=dobYear]').send_keys('1987')
+
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart1]').send_keys('085')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart2]').send_keys('98')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart3]').send_keys('2518')
+
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart1]').send_keys('085')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart2]').send_keys('98')
+      self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart3]').send_keys('2518')
+
+      self.driver.find_element(By.CSS_SELECTOR, '#addrLine1').send_keys('21540 23rd Avenue')
+      self.driver.find_element(By.CSS_SELECTOR, '#cityName').send_keys('Bayside')
+      self.driver.find_element(By.CSS_SELECTOR, '#postalCode').send_keys('11360')
+      states = Select(self.driver.find_element(By.CSS_SELECTOR, '#stateCode'))
+      states.select_by_value('NY')
+
+      solve_normal_captcha('https://www.chexsystems.com/web/PA_ChexSystemsDotCom/CaptchaLoads.gif?1655817259651')
+      self.driver.find_element(By.CSS_SELECTOR, '#captchaText').send_keys('11360')
+
+      self.driver.find_element(By.CSS_SELECTOR, '#submitFreeze').click()
+
+      msg = ''
+      errors = ' - '.join([e.text for e in self.driver.find_elements(By.CSS_SELECTOR, '.panel-body[style*=red] li')])
+      if errors:
+        print(errors)
+        return False, errors
+      else:
+        msg = self.driver.find_element(By.CSS_SELECTOR, '.alert-success').text.replace('\n', ' ').replace('  ', ' ')
+        print(msg)
+        return True, msg
+
+      input('?')
+
+
+
+
+if __name__ == '__main__':
+    TestSelenium().open_browser()
