@@ -31,5 +31,16 @@
         "created_at": "2022-05-09T17:17:10.776Z",
         "updated_at": "2022-05-09T17:17:10.776Z"
     }
+},
+{
+    "model": "core.website",
+    "pk": 4,
+    "fields": {
+        "name": "Innovis",
+        "url": "https://innovis.com/securityFreeze/index",
+        "ready": true,
+        "created_at": "2022-05-09T17:17:10.776Z",
+        "updated_at": "2022-05-09T17:17:10.776Z"
+    }
 }
 ]
