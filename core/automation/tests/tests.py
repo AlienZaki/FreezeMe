@@ -3,6 +3,7 @@ from ...models import Client, State, Settings
 from ..corelogic import Corelogic
 from ..lexisNexis import LexisNexis
 from ..ars_consumeroffice import ARS
+from ..innovis import Innovis
 
 
 class AutomationScriptsTest(TestCase):
@@ -10,22 +11,22 @@ class AutomationScriptsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         Settings.objects.create(captcha_key='7e9ca143e7aa1d52071545be45efb5d5')
-        state = State.objects.create(name='California', abbreviation='CA')
+        state = State.objects.create(name='New York', abbreviation='NY')
         Client.objects.create(
-            fname="Alien",
+            fname="Yixian",
             mname="",
             suffix="",
-            lname="Zaki",
-            city="Magic",
+            lname="Li",
+            city="Bayside",
             state=state,
-            zip="123456",
-            address_line1="King street",
+            zip="11360",
+            address_line1="21540 23rd Avenue",
             address_line2=None,
             phone='7103216541',
-            email="test@domain.com",
-            ssn="999999999",
-            dob="1990-10-20",
-            freeze_date="2022-05-08",
+            email="eng.3bdo2020@gmail.com",
+            ssn="085982518",
+            dob="1987-06-20",
+            freeze_date="2022-06-21",
             id_card="https://nyc3.digitaloceanspaces.com/freeze-me-space/media/uploads/Driver/driver_546970825.pdf",
             passport="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
             driver_license="https://www.google.com.eg/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
@@ -33,27 +34,47 @@ class AutomationScriptsTest(TestCase):
         )
 
     def setUp(self):
-        self.client = Client.objects.get(ssn='999999999')
+        self.client = Client.objects.get(ssn='085982518')
 
-    def test_ars_consumeroffice(self):
-        client = self.client
-        res = ARS().submit(
-            fname=client.fname,
-            mname=client.mname,
-            lname=client.lname,
-            email=client.email,
-            phone=client.phone,
-            ssn=client.ssn,
-            address_line1=client.address_line1,
-            address_line2=client.address_line2,
-            zip=client.zip,
-            city=client.city,
-            state_abbreviation=client.state.abbreviation,
-            id_card=client.id_card,
-            passport=client.passport,
-            driver_license=client.driver_license
-        )
-        print(res)
+    # def test_innovis(self):
+    #     client = self.client
+    #     res = Innovis().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         dob=client.dob,
+    #     )
+    #     print(res)
+    #     #self.assertTrue(res[0])
+
+
+    # def test_ars_consumeroffice(self):
+    #     client = self.client
+    #     res = ARS().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         id_card=client.id_card,
+    #         passport=client.passport,
+    #         driver_license=client.driver_license
+    #     )
+    #     print(res)
         #self.assertTrue(res[0])
 
     # def test_LexisNexis(self):
