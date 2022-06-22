@@ -1,0 +1,12 @@
+1655930192917	geckodriver	INFO	Listening on 127.0.0.1:53278
+1655930195932	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53279" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\alien\\AppData\\Local\\Temp\\rust_mozprofilehdVhiD"
+1655930196440	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\alien\\AppData\\Local\\Temp\\rust_mozprofilehdVhiD\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53279/devtools/browser/81266968-996e-4daa-bcf8-ad414f55fd7d
+1655930198932	Marionette	INFO	Listening on port 53306
+Read port: 53306
+1655930199032	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://content.fisglobal.com/lvCPiFT1q-izK6-w?c3394d85ffcb29e6=I1sBtn8UkulwgNodThpZnmbXPJ2rM4phvK6wzwL3tDFUlW_0XO3ylwnsoyKYY7QMgkzAwybef9AeKMN5iAHwxlg8BU_EYu5hJcv4ZtE15M_N3Pp_jcQiTP3lmilrX4uCtRIL06Dajpbgitxda7-517yjc5lt3ZubQwHiH5SXG6z0b_TwVYnV6YKGNkxAFfWndYQ&jb=3e32262668736f773f57696e666f7773246a736d3f55696e64657f71253232313024687362753f46697267666f7a246873623d4c617065666d782530323939, line 601: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.chexsystems.com"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.chexsystems.com"
+JavaScript warning: https://content.fisglobal.com/sEMmsmxhkD0FYSyB?ca7d6b82700a2f61=YmObX2h6-XA2FWkZ85WV1O9-8ufxQ6jEvm5JZp8QMZf9Lt6IGRlW0_XPrrS8gZS-XHS8_G2Z8hneCm9YbkDOqPe6vu0sxu_gf5aNlhDA0q-CUGe3H1OPEeT9MoHCV-81w7bXp2qj-mJwKPjpLQulTwIBPZOFeAQPHWx9Qc_ByAXS1ElLM2GlnayI0-9TI1nEf-c&jb=3e32262668736f773f57696e666f7773246a736d3f55696e64657f71253232313024687362753f46697267666f7a246873623d4c617065666d782530323939, line 639: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.

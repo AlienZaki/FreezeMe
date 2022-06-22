@@ -11,7 +11,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+import os
 
+os.environ['GH_TOKEN'] = "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"
 
 class Chexsystems:
 
@@ -50,20 +52,14 @@ class Chexsystems:
         PROFILE.set_preference("browser.cache.memory.enable", False)
         PROFILE.set_preference("browser.cache.offline.enable", False)
         PROFILE.set_preference("network.http.use-cache", False)
-        PROFILE.set_preference("general.useragent.override",
-                               "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:72.0) Gecko/20100101 Firefox/72.0")
+        PROFILE.set_preference("general.useragent.override", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:72.0) Gecko/20100101 Firefox/72.0")
 
         # FireFox Options
         FIREFOX_OPTS = Options()
         FIREFOX_OPTS.log.level = "trace"  # Debug
         FIREFOX_OPTS.headless = True
         GECKODRIVER_LOG = '/geckodriver.log'
-        self.driver = webdriver.Firefox(
-            firefox_binary=FIREFOX_BINARY,
-            firefox_profile=PROFILE,
-            options=FIREFOX_OPTS,
-            service_log_path=GECKODRIVER_LOG
-        )
+        self.driver = webdriver.Firefox(firefox_profile=PROFILE, options=FIREFOX_OPTS, service_log_path=GECKODRIVER_LOG, executable_path=GeckoDriverManager().install()) #firefox_binary=FIREFOX_BINARY,
         #self.driver = webdriver.Chrome(options=opt, service=Service(GeckoDriverManager().install()))  #'/usr/local/bin/chromedriver'
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 

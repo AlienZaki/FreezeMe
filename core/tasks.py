@@ -7,6 +7,7 @@ from .automation.corelogic import Corelogic
 from .automation.lexisNexis import LexisNexis
 from .automation.innovis import Innovis
 from .automation.chexsystems import Chexsystems
+from .automation.telecomUtilityExchange import TelecomUtilityExchange
 
 
 @shared_task
@@ -57,6 +58,24 @@ def submit_async(submission_id):
     elif 'chexsystems.com'.lower() in submission.website.url.lower():
         try:
             success, msg = Chexsystems().submit(
+                fname=submission.client.fname,
+                mname=submission.client.mname,
+                lname=submission.client.lname,
+                email=submission.client.email,
+                phone=submission.client.phone,
+                dob=submission.client.dob,
+                ssn=submission.client.ssn,
+                address_line1=submission.client.address_line1,
+                address_line2=submission.client.address_line2,
+                zip=submission.client.zip,
+                city=submission.client.city,
+                state_abbreviation=submission.client.state.abbreviation
+            )
+        except Exception as e:
+            success, msg = False, e
+    elif 'exchangeservicecenter.com'.lower() in submission.website.url.lower():
+        try:
+            success, msg = TelecomUtilityExchange().submit(
                 fname=submission.client.fname,
                 mname=submission.client.mname,
                 lname=submission.client.lname,
