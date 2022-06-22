@@ -15,7 +15,8 @@ class Chexsystems:
         self.solver = CaptchaSolver()
 
     def open_browser(self):
-        driver_path = chromedriver_autoinstaller.install()
+        driver_path = chromedriver_autoinstaller.install('/utils')
+        print(driver_path)
 
         opt = webdriver.ChromeOptions()
         opt.add_argument('--disable-blink-features=AutomationControlled')
