@@ -37,24 +37,24 @@ class AutomationScriptsTest(TestCase):
     def setUp(self):
         self.client = Client.objects.get(ssn='085980518')
 
-    # def test_chexsystems(self):
-    #     client = self.client
-    #     res = Chexsystems().submit(
-    #         fname=client.fname,
-    #         mname=client.mname,
-    #         lname=client.lname,
-    #         email=client.email,
-    #         phone=client.phone,
-    #         ssn=client.ssn,
-    #         address_line1=client.address_line1,
-    #         address_line2=client.address_line2,
-    #         zip=client.zip,
-    #         city=client.city,
-    #         state_abbreviation=client.state.abbreviation,
-    #         dob=client.dob,
-    #     )
-    #     print(res)
-    #     #self.assertTrue(res[0])
+    def test_chexsystems(self):
+        client = self.client
+        res = Chexsystems().submit(
+            fname=client.fname,
+            mname=client.mname,
+            lname=client.lname,
+            email=client.email,
+            phone=client.phone,
+            ssn=client.ssn,
+            address_line1=client.address_line1,
+            address_line2=client.address_line2,
+            zip=client.zip,
+            city=client.city,
+            state_abbreviation=client.state.abbreviation,
+            dob=client.dob,
+        )
+        print(res)
+        #self.assertTrue(res[0])
 
     # def test_innovis(self):
     #     client = self.client

@@ -15,7 +15,8 @@ class Chexsystems:
         self.solver = CaptchaSolver()
 
     def open_browser(self):
-        chromedriver_autoinstaller.install()
+        driver_path = chromedriver_autoinstaller.install()
+
         opt = webdriver.ChromeOptions()
         opt.add_argument('--disable-blink-features=AutomationControlled')
         opt.add_argument("--start-maximized")
@@ -33,7 +34,7 @@ class Chexsystems:
         opt.add_experimental_option("excludeSwitches", ["enable-automation"])
         opt.add_experimental_option('useAutomationExtension', False)
         opt.add_experimental_option("windowTypes", ["webview"])
-        self.driver = webdriver.Chrome(options=opt)
+        self.driver = webdriver.Chrome(options=opt, executable_path=driver_path)
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def submit(self, fname, mname, lname, email, ssn, phone, dob, address_line1, address_line2, zip, city,  state_abbreviation):
