@@ -82,6 +82,7 @@ class TelecomUtilityExchange:
 
         print('=> Filling data 7 ...')
         self.driver.find_element(By.CSS_SELECTOR, 'input[lang*=requiredAcceptTerms]').find_element(By.XPATH, '..').click()
+        time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, 'button[lang*=continue]').click()
 
         while self.driver.find_elements(By.CSS_SELECTOR, 'button[lang*=continue]'):
