@@ -39,7 +39,7 @@ class Chexsystems:
         # opt.add_experimental_option('useAutomationExtension', False)
         # opt.add_experimental_option("windowTypes", ["webview"])
 
-        self.driver = webdriver.Chrome(options=opt, service=Service('/usr/local/bin/chromedriver'))
+        self.driver = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'))
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def submit(self, fname, mname, lname, email, ssn, phone, dob, address_line1, address_line2, zip, city,  state_abbreviation):
