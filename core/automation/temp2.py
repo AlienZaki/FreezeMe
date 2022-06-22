@@ -1,3 +1,3 @@
-from datetime import date
+import os
 
-print()
+print(os.getcwd())
