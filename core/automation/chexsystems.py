@@ -38,7 +38,7 @@ class Chexsystems:
         opt.add_experimental_option("excludeSwitches", ["enable-automation"])
         opt.add_experimental_option('useAutomationExtension', False)
         opt.add_experimental_option("windowTypes", ["webview"])
-        path = ChromeDriverManager(path=r".\\core\\automation\\utils\\Drivers").install()
+        path = chromedriver_autoinstaller.install(path=r".\\core\\automation\\utils\\Drivers")#ChromeDriverManager(path=r".\\core\\automation\\utils\\Drivers").install()
         print(path)
         self.driver = webdriver.Chrome(options=opt,service=Service(path)) #/usr/local/bin/chromedriver
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
