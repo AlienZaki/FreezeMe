@@ -23,7 +23,7 @@ class Chexsystems:
         #print(driver_path)
 
         opt = webdriver.ChromeOptions()
-        opt.add_argument('--disable-dev-shm-usage')
+        #opt.add_argument('--disable-dev-shm-usage')
         #opt.add_argument("--no-sandbox")
         opt.add_argument("--headless")
 
