@@ -23,14 +23,14 @@ class Chexsystems:
         #print(driver_path)
 
         opt = webdriver.ChromeOptions()
-        #opt.add_argument('--disable-dev-shm-usage')
-        #opt.add_argument("--no-sandbox")
+        opt.add_argument('--disable-dev-shm-usage')
+        opt.add_argument("--no-sandbox")
         opt.add_argument("--headless")
 
-        # opt.add_argument('--disable-blink-features=AutomationControlled')
-        # opt.add_argument("--disable-blink-features")
-        # opt.add_argument('--disable-cached')
-        # opt.add_argument("--disable-application-cache")
+        opt.add_argument('--disable-blink-features=AutomationControlled')
+        opt.add_argument("--disable-blink-features")
+        opt.add_argument('--disable-cached')
+        opt.add_argument("--disable-application-cache")
         # opt.add_argument("accept-language=en-GB,en;q=0.9,en-US;q=0.8")
         # opt.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36')
         # opt.add_argument("--start-maximized")
@@ -39,7 +39,7 @@ class Chexsystems:
         # opt.add_experimental_option('useAutomationExtension', False)
         # opt.add_experimental_option("windowTypes", ["webview"])
 
-        self.driver = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'))
+        self.driver = webdriver.Chrome(options=opt, service=Service('/usr/local/bin/chromedriver'))
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def submit(self, fname, mname, lname, email, ssn, phone, dob, address_line1, address_line2, zip, city,  state_abbreviation):
@@ -87,7 +87,7 @@ class Chexsystems:
         print('=> Filling data 8 ...')
         self.driver.find_element(By.CSS_SELECTOR, '#submitFreeze').click()
 
-        errors = ' - '.join([e.text for e in self.driver.find_elements(By.CSS_SELECTOR, '.panel-body[style*=red] li')])
+        errors = '\n'.join([e.text for e in self.driver.find_elements(By.CSS_SELECTOR, '.panel-body[style*=red] li')])
         if errors:
             print('=> Failed to submit:', errors)
             return False, errors

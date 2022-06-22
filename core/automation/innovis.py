@@ -66,7 +66,7 @@ class Innovis:
                 print('=> Submitted Successfully!')
                 return True, msg
             else:
-                errors = ' - '.join(soup.select('.error_message'))
+                errors = '\n'.join(soup.select('.error_message'))
                 if errors:
                     msg = errors
                 else:

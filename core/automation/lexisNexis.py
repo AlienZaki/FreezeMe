@@ -74,7 +74,7 @@ class LexisNexis:
                 print('=> Submitted Successfully!')
                 return True, msg
             else:
-                msg = ' '.join(r.json()["data"])
+                msg = '\n'.join(r.json()["data"])
                 print('=> Failed to submit:', r.text)
                 return False, msg
         except Exception:
