@@ -18,6 +18,7 @@ class Chexsystems:
         self.solver = CaptchaSolver()
 
     def open_browser(self):
+        print('=> Opening browser...')
         #driver_path = chromedriver_autoinstaller.install(path=os.getcwd())
         #print(driver_path)
 
@@ -39,42 +40,52 @@ class Chexsystems:
         opt.add_experimental_option('useAutomationExtension', False)
         opt.add_experimental_option("windowTypes", ["webview"])
 
-        self.driver = webdriver.Chrome(options=opt, service=Service('/usr/src/app/chromedriver')) #/usr/local/bin/chromedriver
+        self.driver = webdriver.Chrome(options=opt, service=Service('/usr/local/bin/chromedriver'))
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def submit(self, fname, mname, lname, email, ssn, phone, dob, address_line1, address_line2, zip, city,  state_abbreviation):
-
+        print('=> Submitting...')
+        print('=> Opening website...')
         self.driver.get('https://www.chexsystems.com/web/chexsystems/consumerdebit/page/securityfreeze/placefreeze')
+
+        print('=> Filling data 1 ...')
 
         self.driver.find_element(By.CSS_SELECTOR, '#optionAgree').click()
         self.driver.find_element(By.CSS_SELECTOR, '#deniedYes').click()
 
+        print('=> Filling data 2 ...')
         self.driver.find_element(By.CSS_SELECTOR, '#firstName').send_keys(fname)
         self.driver.find_element(By.CSS_SELECTOR, '[name*=lastName]').send_keys(lname)
 
+        print('=> Filling data 3 ...')
         self.driver.find_element(By.CSS_SELECTOR, '#dobMon').send_keys(dob.month)
         self.driver.find_element(By.CSS_SELECTOR, '[name*=dobDay]').send_keys(dob.day)
         self.driver.find_element(By.CSS_SELECTOR, '[name*=dobYear]').send_keys(dob.year)
 
+        print('=> Filling data 4 ...')
         self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart1]').send_keys(ssn[:3])
         self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart2]').send_keys(ssn[3:5])
         self.driver.find_element(By.CSS_SELECTOR, '[name*=govtNbrPart3]').send_keys(ssn[5:])
 
+        print('=> Filling data 5 ...')
         self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart1]').send_keys(ssn[:3])
         self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart2]').send_keys(ssn[3:5])
         self.driver.find_element(By.CSS_SELECTOR, '[name*=vrfyGovtNbrPart3]').send_keys(ssn[5:])
 
+        print('=> Filling data 6 ...')
         self.driver.find_element(By.CSS_SELECTOR, '#addrLine1').send_keys(address_line1)
         self.driver.find_element(By.CSS_SELECTOR, '#cityName').send_keys(city)
         self.driver.find_element(By.CSS_SELECTOR, '#postalCode').send_keys(zip)
         states = Select(self.driver.find_element(By.CSS_SELECTOR, '#stateCode'))
         states.select_by_value(state_abbreviation)
 
+        print('=> Filling data 7 ...')
         captcha_image = self.driver.find_element(By.CSS_SELECTOR, '#captcha_image').get_attribute('src')
         print(captcha_image)
         code = self.solver.solve_normal_captcha(captcha_image)['code']
         self.driver.find_element(By.CSS_SELECTOR, '#captchaText').send_keys(code)
 
+        print('=> Filling data 8 ...')
         self.driver.find_element(By.CSS_SELECTOR, '#submitFreeze').click()
 
         errors = ' - '.join([e.text for e in self.driver.find_elements(By.CSS_SELECTOR, '.panel-body[style*=red] li')])
