@@ -71,6 +71,10 @@ class TelecomUtilityExchange:
         states[0].find_element(By.XPATH, '..').find_element(By.XPATH, '..').click()
         self.driver.execute_script(f"document.querySelector('.v-select__selection.v-select__selection--comma').innerHTML = '{state_abbreviation}';")
 
+        errors = self.driver.find_elements(By.CSS_SELECTOR, '.v-messages__message')
+        if errors:
+            errors = '\n'.join([e.text for e in errors])
+            return False, errors
 
         print('=> Filling data 6 ...')
         code = self.solver.solve_recaptcha(site_key='6LddetAaAAAAAHQJkMXf8jX0bnlkIBor_6N9MJbD', url='https://www.exchangeservicecenter.com/Freeze/')['code']
@@ -82,7 +86,7 @@ class TelecomUtilityExchange:
 
         print('=> Filling data 7 ...')
         self.driver.find_element(By.CSS_SELECTOR, 'input[lang*=requiredAcceptTerms]').find_element(By.XPATH, '..').click()
-        time.sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR, 'button[lang*=continue]').click()
 
         while self.driver.find_elements(By.CSS_SELECTOR, 'button[lang*=continue]'):
