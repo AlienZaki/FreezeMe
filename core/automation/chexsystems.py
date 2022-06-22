@@ -5,6 +5,8 @@ from .utils.captcha import CaptchaSolver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import chromedriver_autoinstaller
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
 import os
 
@@ -36,7 +38,7 @@ class Chexsystems:
         opt.add_experimental_option("excludeSwitches", ["enable-automation"])
         opt.add_experimental_option('useAutomationExtension', False)
         opt.add_experimental_option("windowTypes", ["webview"])
-        self.driver = webdriver.Chrome(options=opt)
+        self.driver = webdriver.Chrome(options=opt,service=Service(ChromeDriverManager().install()))
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def submit(self, fname, mname, lname, email, ssn, phone, dob, address_line1, address_line2, zip, city,  state_abbreviation):
