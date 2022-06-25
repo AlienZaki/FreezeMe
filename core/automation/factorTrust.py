@@ -56,15 +56,17 @@ class FactorTrust:
                 print('=> Submitted Successfully!')
                 return True, msg
             else:
-                errors = soup.select_one('#ContentPlaceHolder1_valSumErrors').text.strip()
-                if not errors:
+                errors = soup.select_one('#ContentPlaceHolder1_valSumErrors')
+                if errors:
+                    errors = errors.text.strip()
+                else:
                     errors = '\n'.join([e.text.strip() for e in soup.select('.error')])
 
                 print('=> Failed to submit:', errors)
                 return False, errors
         except Exception as e:
             print('ERROR:', e)
-            print('=> EXCEPTION Failed to submit:', r.text)
+            print('=> EXCEPTION Failed to submit:', 'r.text')
             return False, msg
 
 
