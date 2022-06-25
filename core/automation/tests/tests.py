@@ -6,6 +6,7 @@ from ..ars_consumeroffice import ARS
 from ..innovis import Innovis
 from ..chexsystems import Chexsystems
 from ..telecomUtilityExchange import TelecomUtilityExchange
+from ..factorTrust import FactorTrust
 
 
 class AutomationScriptsTest(TestCase):
@@ -40,7 +41,7 @@ class AutomationScriptsTest(TestCase):
 
     def test_TelecomUtilityExchange(self):
         client = self.client
-        res = TelecomUtilityExchange().submit(
+        res = FactorTrust().submit(
             fname=client.fname,
             mname=client.mname,
             lname=client.lname,
@@ -55,7 +56,25 @@ class AutomationScriptsTest(TestCase):
             dob=client.dob,
         )
         print(res)
-        #self.assertTrue(res[0])
+
+    # def test_TelecomUtilityExchange(self):
+    #     client = self.client
+    #     res = TelecomUtilityExchange().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         dob=client.dob,
+    #     )
+    #     print(res)
+    #     #self.assertTrue(res[0])
 
     # def test_chexsystems(self):
     #     client = self.client
