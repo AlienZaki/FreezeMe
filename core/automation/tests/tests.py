@@ -7,6 +7,7 @@ from ..innovis import Innovis
 from ..chexsystems import Chexsystems
 from ..telecomUtilityExchange import TelecomUtilityExchange
 from ..factorTrust import FactorTrust
+from ..clarityServices import ClarityServices
 
 
 class AutomationScriptsTest(TestCase):
@@ -39,9 +40,9 @@ class AutomationScriptsTest(TestCase):
     def setUp(self):
         self.client = Client.objects.get(ssn='085980518')
 
-    def test_TelecomUtilityExchange(self):
+    def test_ClarityServices(self):
         client = self.client
-        res = FactorTrust().submit(
+        res = ClarityServices().submit(
             fname=client.fname,
             mname=client.mname,
             lname=client.lname,
@@ -56,6 +57,24 @@ class AutomationScriptsTest(TestCase):
             dob=client.dob,
         )
         print(res)
+
+    # def test_TelecomUtilityExchange(self):
+    #     client = self.client
+    #     res = FactorTrust().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         dob=client.dob,
+    #     )
+    #     print(res)
 
     # def test_TelecomUtilityExchange(self):
     #     client = self.client

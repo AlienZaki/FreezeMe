@@ -14,10 +14,10 @@ class CaptchaSolver:
         #api_key = '7e9ca143e7aa1d52071545be45efb5d5'
         self.solver = TwoCaptcha(api_key)
 
-    def solve_recaptcha(self, site_key, url):
+    def solve_recaptcha(self, site_key, url, invisible=0):
         try:
             print('=> Solving captcha...')
-            result = self.solver.recaptcha(sitekey=site_key, url=url)
+            result = self.solver.recaptcha(sitekey=site_key, url=url, invisible=invisible)
             print('=> Captcha solved!')
         except ApiException as e:
             errors = {
@@ -48,7 +48,7 @@ class CaptchaSolver:
 if __name__ == '__main__':
     c = CaptchaSolver()
     #code = c.solve_normal_captcha('https://www.chexsystems.com/web/PA_ChexSystemsDotCom/CaptchaLoads.gif?1655817259651')['code']
-    code = c.solve_recaptcha(site_key='6LdHJZoUAAAAANmKyn_5fJ1UeXrXrrcnUhLRIN_Y', url='https://consumers.clarityservices.com/idv?type=PLACE_SECURITY_FREEZE')
+    code = c.solve_recaptcha(site_key='6LdHJZoUAAAAANmKyn_5fJ1UeXrXrrcnUhLRIN_Y', url='https://consumers.clarityservices.com/idv?type=PLACE_SECURITY_FREEZE', invisible=1)
     print(code)
     import requests
     import json
