@@ -75,5 +75,16 @@
         "created_at": "2022-05-09T17:17:10.776Z",
         "updated_at": "2022-05-09T17:17:10.776Z"
     }
+},
+{
+    "model": "core.website",
+    "pk": 8,
+    "fields": {
+        "name": "Clarity services",
+        "url": "https://consumers.clarityservices.com/idv?type=PLACE_SECURITY_FREEZE",
+        "ready": true,
+        "created_at": "2022-05-09T17:17:10.776Z",
+        "updated_at": "2022-05-09T17:17:10.776Z"
+    }
 }
 ]

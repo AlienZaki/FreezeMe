@@ -26,7 +26,7 @@ class ClarityServices:
         opt = webdriver.ChromeOptions()
         opt.add_argument('--disable-dev-shm-usage')
         opt.add_argument("--no-sandbox")    # **
-        #opt.add_argument("--headless")  # **
+        opt.add_argument("--headless")  # **
 
         opt.add_argument('--disable-blink-features=AutomationControlled')
         opt.add_argument("--disable-blink-features")
