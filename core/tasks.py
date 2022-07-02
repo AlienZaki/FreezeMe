@@ -10,6 +10,8 @@ from .automation.chexsystems import Chexsystems
 from .automation.telecomUtilityExchange import TelecomUtilityExchange
 from .automation.factorTrust import FactorTrust
 from .automation.clarityServices import ClarityServices
+from .automation.sageStreamOpt import SageStreamOpt
+
 
 @shared_task
 def submit_async(submission_id):
@@ -113,6 +115,24 @@ def submit_async(submission_id):
     elif 'consumers.clarityservices.com'.lower() in submission.website.url.lower():
         try:
             success, msg = ClarityServices().submit(
+                fname=submission.client.fname,
+                mname=submission.client.mname,
+                lname=submission.client.lname,
+                email=submission.client.email,
+                phone=submission.client.phone,
+                dob=submission.client.dob,
+                ssn=submission.client.ssn,
+                address_line1=submission.client.address_line1,
+                address_line2=submission.client.address_line2,
+                zip=submission.client.zip,
+                city=submission.client.city,
+                state_abbreviation=submission.client.state.abbreviation
+            )
+        except Exception as e:
+            success, msg = False, e
+    elif 'forms.sagestreamllc.com'.lower() in submission.website.url.lower():
+        try:
+            success, msg = SageStreamOpt().submit(
                 fname=submission.client.fname,
                 mname=submission.client.mname,
                 lname=submission.client.lname,
