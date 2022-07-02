@@ -17,6 +17,7 @@ from .automation.sageStreamOpt import SageStreamOpt
 def submit_async(submission_id):
     submission = Submission.objects.get(id=submission_id)
     print(f'=> Submission {submission_id}: Started! ')
+    print(f'Submission: {submission.client.fname} {submission.client.lname} - {submission.website.name}')
     # Doing submission
     if 'corelogic.com'.lower() in submission.website.url.lower():
         try:
