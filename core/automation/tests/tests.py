@@ -9,6 +9,7 @@ from ..telecomUtilityExchange import TelecomUtilityExchange
 from ..factorTrust import FactorTrust
 from ..clarityServices import ClarityServices
 from ..sageStreamOpt import SageStreamOpt
+from ..sageStream import SageStream
 
 
 class AutomationScriptsTest(TestCase):
@@ -41,9 +42,9 @@ class AutomationScriptsTest(TestCase):
     def setUp(self):
         self.client = Client.objects.get(ssn='085980518')
 
-    def test_SageStreamOpt(self):
+    def test_SageStream(self):
         client = self.client
-        res = SageStreamOpt().submit(
+        res = SageStream().submit(
             fname=client.fname,
             mname=client.mname,
             lname=client.lname,
@@ -58,6 +59,24 @@ class AutomationScriptsTest(TestCase):
             dob=client.dob,
         )
         print(res)
+
+    # def test_SageStreamOpt(self):
+    #     client = self.client
+    #     res = SageStreamOpt().submit(
+    #         fname=client.fname,
+    #         mname=client.mname,
+    #         lname=client.lname,
+    #         email=client.email,
+    #         phone=client.phone,
+    #         ssn=client.ssn,
+    #         address_line1=client.address_line1,
+    #         address_line2=client.address_line2,
+    #         zip=client.zip,
+    #         city=client.city,
+    #         state_abbreviation=client.state.abbreviation,
+    #         dob=client.dob,
+    #     )
+    #     print(res)
 
     # def test_ClarityServices(self):
     #     client = self.client

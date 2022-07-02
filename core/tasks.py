@@ -11,13 +11,14 @@ from .automation.telecomUtilityExchange import TelecomUtilityExchange
 from .automation.factorTrust import FactorTrust
 from .automation.clarityServices import ClarityServices
 from .automation.sageStreamOpt import SageStreamOpt
+from .automation.sageStream import SageStream
 
 
 @shared_task
 def submit_async(submission_id):
     submission = Submission.objects.get(id=submission_id)
     print(f'=> Submission {submission_id}: Started! ')
-    print(f'Submission: {submission.client.fname} {submission.client.lname} - {submission.website.name}')
+    print(f'=> Submission: {submission.client.fname} {submission.client.lname} - {submission.website.name}')
     # Doing submission
     if 'corelogic.com'.lower() in submission.website.url.lower():
         try:
@@ -134,6 +135,24 @@ def submit_async(submission_id):
     elif 'forms.sagestreamllc.com'.lower() in submission.website.url.lower():
         try:
             success, msg = SageStreamOpt().submit(
+                fname=submission.client.fname,
+                mname=submission.client.mname,
+                lname=submission.client.lname,
+                email=submission.client.email,
+                phone=submission.client.phone,
+                dob=submission.client.dob,
+                ssn=submission.client.ssn,
+                address_line1=submission.client.address_line1,
+                address_line2=submission.client.address_line2,
+                zip=submission.client.zip,
+                city=submission.client.city,
+                state_abbreviation=submission.client.state.abbreviation
+            )
+        except Exception as e:
+            success, msg = False, e
+    elif 'forms.consumer.risk.lexisnexis.com'.lower() in submission.website.url.lower():
+        try:
+            success, msg = SageStream().submit(
                 fname=submission.client.fname,
                 mname=submission.client.mname,
                 lname=submission.client.lname,
