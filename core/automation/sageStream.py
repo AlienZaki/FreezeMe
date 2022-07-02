@@ -34,7 +34,7 @@ class SageStream:
             "documents": {
                 "option": 0,
                 "files": [
-                    {"bucket": "sagestream-file-api-prod", "key": "eb7f3400-1300-4e00-007f-bec91984bc00/self-0.png"}
+                    {"bucket": "sagestream-file-api-prod", "key": "e7082666-c5cd-41b2-9447-018f1c445f8f/self-0.png"}
                 ]}
             }, "parameters": {"recover": False}
         }
